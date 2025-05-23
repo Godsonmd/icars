@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i cars | Registration</title>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="main-wrapper">
+          <img src="{% static '/car img/view-car-running-high-speed.jpg' %}" alt="Background decorative image" class="background-image" />
+          <nav class="nav-container" role="navigation" aria-label="Main navigation">
+            <div class="nav-links show1">
+              <div class="brand-logo">i CARS</div>
+              <a href="/" class="nav-link">Home</a>
+              <a href="/profile" class="nav-link">About</a>
+              <a href="/profile" class="nav-link">Contact</a>
+            </div>
+            <button class="cta-button show2" onclick="window.location.href='/profile';" aria-label="Buy Now">Subscribe Now</button>
+          </nav>
+          <main class="content-wrapper">
+            <div class="content-grid">
+              <div class="form-column">
+                <form class="signup-form show"  autocomplete="on" method="POST">
+                {% csrf_token %}
+                  <h1 class="form-title">Create account</h1>
+                  <div class="handle">
+                    <label for="customer" class="radiotype">
+                    <input type="radio" name="handle" checked value="customer" id="customer">
+                   <span>
+
+                       Customer
+                   </span> 
+                </label>
+                    <label for="client" class="radiotype">
+                    <input type="radio" name="handle" value="client" id="client">                        
+                <span>
+
+                    Client
+                </span>    
+                </label>
+            </div><br>
+            <div class="form-group">
+              <label for="name" class="form-label">Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name"
+                class="input-field" 
+                required 
+                aria-required="true"
+                autocomplete="name"
+                size="50"
+              />
+            </div>
+                  <div class="form-group">
+                    <label for="email" class="form-label">Email address</label>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      name="email"
+                      class="input-field" 
+                      required 
+                      aria-required="true"
+                      autocomplete="email"
+                      size="50"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                      <input 
+                        type="password" 
+                        id="password"
+                        name="password" 
+                        required
+                        aria-required="true"
+                        autocomplete="new-password"
+                        pattern="[A-Za-z0-9]{8}"
+                        title="Alphanumericals & 8 characters are only allowed"
+                        minlength="8"
+                        maxlength="8"
+                        class="input-field"
+                      size="50"
+                      />
+                  </div>
+                  <div class="form-group">
+                    <label for="confirm-password" class="form-label">Confirm password</label>
+                      <input 
+                        type="password" 
+                        id="confirm-password"
+                        name="repassword"
+                        required
+                        pattern="[A-Za-z0-9]{8}"
+                        title="Alphanumericals & 8 characters are only allowed"
+                        aria-required="true"
+                        autocomplete="new-password"
+                        minlength="8"
+                        maxlength="8"
+                      size="50"
+                        class="input-field" 
+                        onkeyup="check();"
+                      />
+                  </div>
+                  <div class="terms-group">
+                    <input 
+                      type="checkbox" 
+                      id="terms" 
+                      name="terms"
+                      required 
+                      class="terms-checkbox"
+                      checked
+                      aria-required="true"
+                    />
+                    <label for="terms" class="terms-label">
+                      I accept the <a href="/tc"  class="tc-link">terms and privacy policy</a>
+                    </label>
+                  </div>
+                  <button type="submit" disabled id="sbtn" class="submit-button">Sign up</button>
+                </form>
+              </div>
+              <div class="quote-column">
+                <blockquote class="quote-text show2">
+                  You are now <br><span class="bold-text">one step</span> closer to
+                  <br />
+                  renting your <span class="bold-text">dream car ! </span>
+                </blockquote>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+</body>
+      <script>
+
+        function check(){
+          let p=document.getElementById('password');
+          let rp=document.getElementById('confirm-password');
+          if (p.value == rp.value)
+          {
+            let b=document.querySelector('.submit-button');
+            b.disabled=false;
+            b.innerText="Sign up"
+          }
+          else{
+            let b=document.querySelector('.submit-button');
+            b.disabled=true;
+            b.innerText="Check confirmation Password";
+          }
+        }
+        
+      </script>
+      <style>
+      :root {
+        --primary-color:#ea454c;
+        --secondary-color: rgb(135, 68, 68);
+        --text-color: #000;
+        --white: #fff;
+        --border-color: rgb(216, 218, 220);
+        --focus-outline: 3px solid #4D90FE;
+      }
+      .handle{
+        display: flex;
+        gap: 50px;
+        justify-content: space-around;
+        max-width: 44.75rem;
+        color: white;
+        
+    }
+    .radiotype{
+        display: block;
+        cursor: pointer;
+        font-weight: bolder;
+        font-size: 25px;
+        text-shadow: none;
+        
+    }
+    
+    .radiotype input[type="radio"]{
+        display: none;
+    }
+    .radiotype input[type="radio"]:checked + span{
+        color: white;
+        text-shadow: 0 0 10px red, 0 0 20px red, 0 0 40px red, 0 0 80px red,0 0 160px red;
+    }
+    .radiotype span:hover{
+        color: red;
+        transition: color 2s;
+    }
+      .vani{
+        animation: vv both;
+        animation-timeline: view(75% 25%);
+       }
+       @keyframes vv{
+        from{
+            opacity: 0;
+            transform: translateY(200px) scale(0.3);
+        } 
+        to{
+            opacity: 1;
+            transform: translateY(0px) scale(1);
+        }            
+       }
+       
+       .show{
+        animation: ss 2s   1 ease ;
+       }
+       @keyframes ss{
+        from{
+            opacity: 0;
+            transform: translateY(50px) scale(0.3);
+        } 
+        to{
+            opacity: 1;
+            transform: translateY(0px);
+        }            
+       }
+       .show1{
+        animation: sss 2s   1 ease ;
+       }
+       @keyframes sss{
+        from{
+            opacity: 0;
+            transform: translateX(-50px);
+            
+        } 
+        to{
+            opacity: 1;
+            transform: translateX(0px);
+        }            
+       }
+       .show2{
+        animation: ssss 2s   1 ease ;
+       }
+       @keyframes ssss{
+        from{
+            opacity: 0;
+            transform: translateX(50px);
+            
+        } 
+        to{
+            opacity: 1;
+            transform: translateX(0px);
+        }            
+       }
+      .tc-link{
+        text-decoration: none;
+        color: white;
+        transition: all 1s;
+      }
+      .tc-link:hover{
+        text-decoration: underline;
+        color: red;
+    }
+      .signup-container {
+        background-color: var(--text-color);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        min-height: 60vh;
+      }
+      body{
+        background-color: #000;
+      }
+      .main-wrapper {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        min-height: 99vh;
+        width: 100%;
+      }
+      
+      .background-image {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        width: 100%;
+        object-fit:cover;
+        object-position: center;
+      }
+      
+      .nav-container {
+        position: relative;
+        background-color: transparent;
+        border-bottom: 2px solid white;
+        display: flex;
+        width: 100%;
+        gap: 20px;
+        font-family: Roboto, system-ui, sans-serif;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 1rem 5rem 1rem 1.125rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      
+      .nav-links {
+        display: flex;
+        gap: 2.5rem 3.625rem;
+        font-size: 1.25rem;
+        color: white;
+        font-weight: 400;
+        line-height: 1.2;
+        flex-wrap: wrap;
+        margin: auto 0;
+        align-items: center;
+      }
+      
+      .nav-link {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+      
+      .nav-link:hover,
+      .nav-link:focus {
+        color: var(--primary-color);
+        outline: none;
+        text-decoration: none;
+      }
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: #ea454c;
+        transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link:focus::after {
+        width: 100%;
+    }
+      .nav-link:focus-visible {
+        outline: var(--focus-outline);
+        outline-offset: 2px;
+      }
+      
+      .brand-logo {
+        text-transform: lowercase;
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: 5.4px;
+        text-align: center;
+        border: white;
+        padding: 0.5rem 1rem;
+        
+      }
+      
+      .cta-button {
+        background-color: black;
+        color: var(--white);
+        border: 2px solid white;
+        padding: 0.75rem 2rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.5s; /* Adjusted duration */
+        border-top-left-radius: 40px;
+        border-bottom-left-radius: 40px;
+        transform: translateX(20px);
+        width: 180px; /* Set an initial width */
+    }
+    
+    .cta-button:hover,
+    .cta-button:focus {
+        background-color: red;
+        width: 200px; /* Target width on hover */
+    }
+      
+      .content-wrapper {
+        position: relative;
+        align-self: center;
+        width: 100%;
+        max-width: 1440px;
+        margin: auto;
+        padding: 2rem;
+        flex: 1;
+      }
+      
+      .content-grid {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        height: 100%;
+      }
+      
+      .form-column {
+        flex: 0 1 37%;
+        min-width: 320px;
+      }
+      
+      .signup-form {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 2rem;
+        border-radius: 1rem;
+        color: var(--white);
+        font-family: Inter, system-ui, sans-serif;
+      }
+      
+      .form-title {
+        font-family: Poppins, system-ui, sans-serif;
+        font-size: 2.25rem;
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: -0.36px;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+      
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+      }
+      
+      .input-field,
+      .password-field {
+        padding: 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 0.625rem;
+        background-color: var(--white);
+        color: var(--text-color);
+        font-size: 1rem;
+      }
+      
+      .password-field {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+      }
+      
+      .password-field input {
+        flex: 1;
+        border: none;
+        background: none;
+        padding: 0;
+        color: var(--text-color);
+      }
+      
+      .password-toggle-btn {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+      }
+      
+      .password-toggle {
+        width: 1.25rem;
+        height: 1.25rem;
+        object-fit: contain;
+      }
+      
+      .terms-group {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 1.5rem 0;
+      }
+      
+      .terms-checkbox {
+        width: 1.25rem;
+        height: 1.25rem;
+        cursor: pointer;
+      }
+      
+      .terms-label {
+        font-size: 0.875rem;
+        cursor: pointer;
+      }
+      
+      .submit-button {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--primary-color);
+        color: var(--white);
+        border: none;
+        border-radius: 0.625rem;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      
+      .submit-button:hover,
+      .submit-button:focus {
+        background-color: var(--secondary-color);
+        outline: none;
+      }
+      
+      .submit-button:focus-visible {
+        outline: var(--focus-outline);
+        outline-offset: 2px;
+      }
+      
+      .quote-column {
+        flex: 0 1 63%;
+      }
+      
+      .quote-text {
+        color: var(--white);
+        font-family: Montserrat, system-ui, sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        text-align: center;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      }
+      
+      .bold-text {
+        font-weight: 800;
+      }
+      
+      @media (max-width: 1200px) {
+        .content-grid {
+          gap: 1rem;
+        }
+        
+        .quote-text {
+          font-size: 2rem;
+        }
+      }
+      
+      @media (max-width: 991px) {
+        .nav-container {
+          padding: 1rem;
+        }
+        
+        .content-grid {
+          flex-direction: column;
+        }
+        
+        .form-column,
+        .quote-column {
+          flex: 0 1 100%;
+          width: 100%;
+        }
+        
+        .signup-form {
+          max-width: 480px;
+          margin: 0 auto;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .nav-links {
+          gap: 1rem;
+          font-size: 1rem;
+        }
+        
+        .form-title {
+          font-size: 1.75rem;
+        }
+        
+        .quote-text {
+          font-size: 1.5rem;
+        }
+      }
+      
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+      blockquote span{
+        transition: 1s;
+        color: red;
+      }
+      blockquote:hover{
+        transition: 1.5s;
+        font-size: 400%;
+         
+      }
+      </style>
+</html>

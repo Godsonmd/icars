@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Arogya Diet Planner Login Page">
+    <title>i cars | Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <style>
+        :root {
+            --primary-color: #ea454c;
+            --dark-bg: #1e1e1e;
+            --white: rgba(255, 255, 255, 1);
+            --shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 60vh;
+            overflow-x: hidden;
+        }
+
+        .login-container {
+            min-height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-wrapper {
+            position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 1rem 2rem;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            background-size: cover;
+            z-index: 0;
+        }
+
+        .header-nav {
+            position: relative;
+            z-index: 2;
+            background-color: #0000004e;
+            border-bottom: 2px solid white;
+            width: 110%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            cursor: default;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: clamp(1rem, 4vw, 3.5rem);
+            align-items: center;
+        }
+
+        .nav-links span::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #00ffff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links span:hover::after
+         {
+            width: 100% ;
+        }
+        
+        .nav-links span {
+            color: white;
+            text-decoration: none;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        .nav-links span:hover{
+            color: #00ffff;
+        }
+        .brand-logo {
+            font-weight: 700;
+            letter-spacing: 5.4px;
+            padding: 0.5rem 1rem;
+            color: #00ffff;
+        }
+
+        .navactive {
+            color: aqua !important;
+           font-weight: 700;
+            text-decoration: none;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+        }
+        .cta-button {
+            background-color: black;
+            color: var(--white);
+            border: 2px solid white;
+            padding: 0.75rem 2rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.5s; /* Adjusted duration */
+            border-top-left-radius: 40px;
+            border-bottom-left-radius: 40px;
+            transform: translateX(20px);
+            width: 180px; /* Set an initial width */
+        }
+        
+        .cta-button:hover {
+            background-color: red;
+            width: 200px; /* Target width on hover */
+        }
+
+        .herosection {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            margin: clamp(2rem, 8vh, 5rem) 0;
+            color: var(--white);perspective: 100vh;
+        }
+
+        .herotitle {
+            font-size: clamp(2.5rem, 10vw, 60rem);
+            letter-spacing: clamp(0.5rem, 2vw, 1.6rem);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            transition: 2s;
+        }
+        .herotitle::first-letter{
+            text-transform: lowercase;
+        }
+        .herotitle:hover{
+            font-size: clamp(2.5rem, 10vw, 70rem);
+        }  
+        .herosubtitle {
+            font-size: clamp(2rem, 8vw, 4.375rem);
+            letter-spacing: clamp(0.3rem, 1.5vw, 0.83rem);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            transition: 2s;
+        }
+
+        .herodescription {
+            font-size: clamp(1.5rem, 4vw, 2.625rem);
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        .login-form {
+            position: relative;
+            z-index: 999;
+            width: min(90%, 432px);
+            margin: 2rem auto;
+            width: 100%;
+            height: 100%;
+            border-radius: 14px;
+            backdrop-filter: blur(20px);
+            border-top: 1px solid  rgba(255, 255, 255, 0.586);
+            border-right: 1px solid  rgba(255, 255, 255, 0.623);
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.023);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+            margin-left: 20%;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .form-input {
+            width: 80%;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--white);
+            background: var(--white);
+            font-size: 1rem;
+            color: black;
+            text-align: center;
+        }
+        
+        .form-input:focus {
+            transition: all 1s;
+            background: #a6fbfb;
+            color: black;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: var(--white);
+        }
+
+        .remember-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 10%;
+        }
+        
+        .remember-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .remember-wrapper label{
+            color: white;
+        }
+        .tc-link{
+            text-decoration: none;
+            transition: 1s;
+            font-size: 15px;
+            color: white;
+            font-weight: bolder;
+            
+        }
+        .forgot-link{
+            color: var(--primary-color);
+            margin-right: 10%;
+            text-decoration: none;
+            transition: 1s;
+            font-size: 15px;
+            font-weight: bolder;
+        }
+        .submit-button {
+            width: 80%;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-left: 10%;
+        }
+        .submit-button:hover{
+            background: red;
+        }
+        .submit-button:active{
+            opacity: 0.46;
+        }
+        .signup-text {
+            color: var(--white);
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .signup-link {
+            color: var(--primary-color);
+            font-weight: bolder;
+            text-decoration: none;
+            transition: 1s;
+        }
+
+        @media (hover: hover) {
+            .nav-links a:hover {
+                color: var(--primary-color);
+            }
+
+            .cta-button:hover,
+            .submit-button:hover {
+                opacity: 0.9;
+            }
+
+            .forgot-link:hover,
+            .signup-link:hover,
+            .tc-link:hover{
+                text-decoration: underline;
+                color: red;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .form-options {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .hide{
+            display: none;
+        }
+        .section {
+            padding: 5rem 5%;
+            margin-top: 4rem;
+        }
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            background: rgba(0,0,0,0.7);
+            padding: 4rem;
+            height: 100vh;
+            width: 250vh;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-description {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .content-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 3rem;
+            color: black;
+            margin-bottom: 1rem;
+        }
+
+        .grid-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 8rem;
+            min-height: 500px;
+        }
+
+        .text-content {
+            position: relative;
+        }
+
+        .section-subtitle {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 2.5rem;
+            color: black;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .yellow-underline {
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 200px;
+            height: 3px;
+            background: #F3F25B;
+        }
+
+        .description {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.2rem;
+            color: #0A2B45;
+            line-height: 1.8;
+        }
+
+        .image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgb(0, 0, 0);
+        }
+        .image-wrapper1 {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgb(0, 0, 0);
+            border-radius: 50%;
+        }
+        .section-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .technology-section {
+            text-align: right;
+        }
+
+        .technology-section .yellow-underline {
+            right: 0;
+            left: auto;
+        }
+
+        .technology-section .image-wrapper {
+            background: #FFF1C1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .values-section {
+            margin-top: 8rem;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-description {
+                font-size: 1.2rem;
+            }
+
+            .grid-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .technology-section {
+                text-align: left;
+            }
+
+            .technology-section .yellow-underline {
+                left: 0;
+                right: auto;
+            }
+
+            .image-wrapper {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-wrapper {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-content {
+                padding: 2rem;
+                
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.8rem;
+            }
+
+            .image-wrapper {
+                height: 300px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+        .black{
+            background-color: black;
+        }
+        .white{
+            background-color: white;
+        }
+        .header-nav form{
+            transform: translateX(-10px);
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+          }
+        
+          .main-content {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            min-height: 1024px;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            padding: 112px 80px;
+          }
+        
+          .background-image {
+            position: absolute;
+            inset: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+          }
+        
+          .content-wrapper {
+            position: relative;
+            display: flex;
+            margin-bottom: -23px;
+            width: 100%;
+            max-width: 1196px;
+            flex-direction: column;
+          }
+        
+          .contact-title {
+            color: rgba(255, 255, 255, 1);
+            text-align: center;
+            align-self: center;
+            margin-left: 18px;
+            font: 700 48px Poppins, sans-serif;
+          }
+        
+          .info-box {
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 1);
+            box-shadow: 0px 0px 60px 30px rgba(0, 0, 0, 0.03);
+            margin-top: 61px;
+            padding: 10px 80px 10px 10px;
+            
+          }
+        
+          .flex-container {
+            gap: 20px;
+            display: flex;
+          }
+        
+          .left-column {
+            display: flex;
+            flex-direction: column;
+            line-height: normal;
+            width: 70%;
+            margin-left: 0px;
+          }
+        
+          .main-image {
+            aspect-ratio: 0.76;
+            object-fit: contain;
+            object-position: center;
+            width: 100%;
+            flex-grow: 1;
+          }
+        
+          .right-column {
+            display: flex;
+            flex-direction: column;
+            line-height: normal;
+            width: 30%;
+            margin-left: 20px;
+  
+          }
+        
+          .team-info {
+            display: flex;
+            margin-top: 6px;
+            flex-direction: column;
+          }
+        
+          .team-title {
+            color: rgba(152, 0, 30, 1);
+            text-align: center;
+            font-size:30px;
+            font:bolder;
+          }
+        
+          .team-member-container {
+            display: flex;
+            margin-top: 6px;
+            width: 100%;
+            flex-direction: column;
+            align-items: start;
+            padding: 0 11px;
+          }
+        
+          .member-name {
+            color: rgba(0, 0, 0, 1);
+            font: 400 30px Port Lligat Slab, -apple-system, Roboto, Helvetica, sans-serif;
+            margin: 32px 0 0 0;
+            transition: 3s;
+            cursor: default;
+          }
+          .member-name:hover{
+              color: red;
+              font-size:xx-large;
+              letter-spacing: 2mm;
+          }
+          .member-name:first-child {
+            margin-top: 0;
+          }
+        
+          .contact-info,
+          .social-container,
+          .decorative-info {
+            display: flex;
+            gap: 17px;
+            margin: 28px 0 0 10px;
+            color: #ea454c;
+            font: 500 19px Poppins, sans-serif;
+            align-items: center;
+          }
+        
+          .whatsapp-button {
+            display: flex;
+            gap: 17px;
+            color: rgb(56, 204, 66);
+            margin: 6px 0 0 11px;
+            font: 400 16px Poppins, sans-serif;
+            align-items: center;
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+          }
+        
+          .whatsapp-button:hover {
+            background-color: #1ae50c3b;
+            outline: 2px solid rgb(0, 152, 5);
+            outline-offset: 2px;
+          }
+        
+          .whatsapp-icon {
+            aspect-ratio: 1;
+            object-fit: contain;
+            object-position: center;
+            width: 19px;
+          }
+        
+          .text-button {
+            margin-top: 13px;
+          }
+        
+          .contact-icon,
+          .social-icon,
+          .decorative-icon {
+            aspect-ratio: 1;
+            object-fit: contain;
+            object-position: center;
+            width: 19px;
+          }
+        
+          .group-info {
+            display: flex;
+            margin-top: 20px;
+            gap: 17px;
+          }
+        
+          .group-item {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+          }
+        
+          .group-text-container {
+            display: flex;
+            flex-direction: column;
+            font-family: Poppins, sans-serif;
+            color: rgba(152, 0, 30, 1);
+          }
+        
+          .group-text-title {
+            font-size: 19px;
+            font-weight: 500;
+          }
+        
+          @media (max-width: 991px) {
+            .main-content {
+              padding: 100px 20px;
+            }
+        
+            .content-wrapper {
+              margin-bottom: 10px;
+            }
+        
+            .contact-title {
+              font-size: 40px;
+            }
+        
+            .info-box {
+              padding-right: 20px;
+              margin-top: 40px;
+            }
+        
+            .flex-container {
+              flex-direction: column;
+              gap: 0;
+            }
+        
+            .left-column,
+            .right-column {
+              width: 100%;
+              margin-left: 0;
+            }
+        
+            .main-image {
+              margin-top: 40px;
+            }
+        
+            .team-info {
+              margin-top: 40px;
+            }
+        
+            .contact-info,
+            .social-container,
+            .decorative-info {
+              white-space: normal;
+            }
+        
+            .whatsapp-button {
+              padding: 12px;
+            }
+          }
+        
+          @media (prefers-reduced-motion: reduce) {
+            .whatsapp-button {
+              transition: none;
+            }
+          }
+        
+          @media (hover: none) {
+            .whatsapp-button:hover {
+              background-color: transparent;
+            }
+          }
+           #contact1 .background-image {
+            width: 100%;
+           }
+           
+           
+           .show{
+            animation: ss 2s   1 ease ;
+           }
+           @keyframes ss{
+            from{
+                opacity: 0;
+                transform: translateY(50px) scale(0.3);
+            } 
+            to{
+                opacity: 1;
+                transform: translateY(0px);
+            }            
+           }
+           .show1{
+            animation: sss 2s   1 ease ;
+           }
+           @keyframes sss{
+            from{
+                opacity: 0;
+                transform: translateX(-50px);
+                
+            } 
+            to{
+                opacity: 1;
+                transform: translateX(0px);
+            }            
+           }
+           .show2{
+            animation: ssss 2s   1 ease ;
+           }
+           @keyframes ssss{
+            from{
+                opacity: 0;
+                transform: translateX(50px);
+                
+            } 
+            to{
+                opacity: 1;
+                
+            }            
+           }
+         #loading{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0000004e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 100px;
+            
+         }
+         
+         #loading  .a{
+            border: 8px solid transparent;
+            background: transparent;
+            border-radius: 50%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateZ(90px);
+            font-size: 20px;
+            width: 50px;
+            height: 50px;
+            color: white;
+            animation: spin2 2s  ease-in-out forwards infinite;
+         }
+         @keyframes spin {
+            0%,100% { 
+                transform: rotate(0deg);
+                border-top: 8px solid red ;
+                border-bottom:8px solid red;
+            }
+            
+            50% { 
+                
+                transform: rotate(360deg);
+                border-top:  8px solid aqua;
+                border-bottom: 8px solid aqua;
+            }
+        }
+        @keyframes spin2 {
+            0%,100% { 
+                transform: rotate(0deg);
+                box-shadow: 0 0 10px aqua, 0 0 20px aqua, 0 0 40px aqua, 0 0 80px aqua, 0 0 160px aqua;
+                background-color: aqua;
+            }
+            
+            50% { 
+                
+                transform: rotate(360deg);
+                background-color: red;
+                box-shadow: 0 0 10px red, 0 0 20px red, 0 0 40px red, 0 0 80px red, 0 0 160px red;
+
+            }
+        }
+        @keyframes color {
+            0%{text-shadow:0 0 10px red, 0 0 20px red, 0 0 40px red, 0 0 80px red, 0 0 160px red;}
+            25%{text-shadow:0 0 10px aqua, 0 0 20px aqua, 0 0 40px aqua, 0 0 80px aqua, 0 0 160px aqua;}
+            50%{text-shadow:0 0 10px green, 0 0 20px green, 0 0 40px green, 0 0 80px green, 0 0 160px green;}
+            75%{text-shadow:0 0 10px orange, 0 0 20px orange, 0 0 40px orange, 0 0 80px orange, 0 0 160px orange;}
+            100%{text-shadow:0 0 10px red, 0 0 20px red, 0 0 40px red, 0 0 80px red, 0 0 160px red;}
+        }
+        .herotitle:hover{
+           
+           transform: translateZ(100px);
+           color: black;
+           transition: 2s;
+           animation: color 5s linear  infinite forwards ;
+        }
+        .handle{
+            display: flex;
+            gap: 50px;
+            justify-content: space-around;
+            max-width: 44.75rem;
+            color: white;
+            
+        }
+        .radiotype{
+            display: block;
+            cursor: pointer;
+            font-weight: bolder;
+            font-size: 25px;
+            text-shadow: none;
+            padding: 20px;
+            backdrop-filter: blur(20px);
+           
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.023);
+        }
+        .radiotype input[type="radio"]{
+            display: none;
+        }
+        .radiotype input[type="radio"]:checked + span{
+            color: white;
+            text-shadow: 0 0 10px red, 0 0 20px red, 0 0 40px red, 0 0 80px red,0 0 160px red;
+        }
+        .radiotype span:hover{
+            color: red;
+            transition: color 2s;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            transform: translate(15%);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .check {
+            color: green;
+        }
+        .cross {
+            color: red;
+        }
+        tr:hover{
+            background: #333;
+            color: #F3E600;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container black" id="bgc">
+        <div class="main-wrapper">
+            
+            <nav class="header-nav" role="navigation" aria-label="Main navigation">
+                <div class="nav-links">
+                    <div class="brand-logo show1" onclick="navigator.vibrate(200);window.location.href='/admin';">i cars</div>
+                    <span  class=" show1" onclick="homefn();" id="home" aria-current="page">Home</span>
+                    <span  onclick="aboutfn();" class=" show1" id="about">About</span>
+                    <span  onclick="contactfn();" class=" show1" id="contact">Contact</span>
+                    <span  onclick="subfn();" class=" show1" id="sub">Subcription</span>                    
+                </div>
+                    <button class="cta-button show2" onclick="loginout()" type="submit"> Login / Signup </button>
+            </nav>
+            <div id="loading" >
+                <div class="a"><img width="60px" height="60px" src="{% static '/car img/car-steering-wheel-icon-vector-26135651-removebg-preview.png' %}" alt=""></div>
+            </div>
+<div id="home1" class="hide">
+    <img class="background-image" id="homeimg" src="{% static '/car img/R.jpeg' %}" alt="Background decoration" loading="lazy" />
+            <div class="herosection">
+                <h1 class="herotitle ">i cars</h1>
+                <h2 class="herosubtitle show1">CAR RENTAL</h2>
+                <p class="herodescription show2">Personalized trips for Your Better Self</p>                
+            </div>
+            <br><br><br><br>
+            
+            <form class="login-form vani"  method="POST" id="loginForm" style="display: none;">
+                {% csrf_token %}
+                <div class="handle">
+                        <label for="customer" class="radiotype">
+                        <input type="radio" name="handle" checked value="customer" id="customer">
+                       <span>
+
+                           Customer
+                       </span> 
+                    </label>
+                        <label for="admin" class="radiotype">
+                        <input type="radio" name="handle" value="admin" id="admin">
+                        <span>
+
+                            Admin
+                        </span>                        
+                    </label>
+                        <label for="client" class="radiotype">
+                        <input type="radio" name="handle" value="client" id="client">                        
+                    <span>
+
+                        Client
+                    </span>    
+                    </label>
+                </div><br>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input" 
+                        placeholder="Enter your email" 
+                        required 
+                        aria-required="true"
+                        autocomplete="email" 
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-input" 
+                        aria-required="true"
+                        required 
+                        autocomplete="current-password"
+                        placeholder="Enter your password" 
+                       minlength="8"
+                            maxlength="8"
+                    />
+                </div>
+
+                <div class="form-options">
+                    <div class="remember-wrapper">
+                        <input 
+                            type="checkbox" 
+                            id="remember" 
+                            name="remember" 
+                            class="remember-checkbox"
+                            aria-label="Remember me"
+                            required
+                            checked
+                        />
+                        <label for="remember"><a href="/tc" class="tc-link">Terms & conditions</a> are visited</label>
+                    </div>
+                    <a href="/sendmail" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <input type="submit" class="submit-button" value="Log in">
+
+                <p class="signup-text">
+                    Don't have an account?
+                    <a href="/register" class="signup-link">Sign up for free!</a>
+                </p>
+            </form>
+        </div>
+        <div id="about1" class="hide">
+            <section class="hero-section" aria-labelledby="mission-title">
+                <img src="{% static '/car img/about1.webp'%}" alt="Healthy lifestyle background" class="hero-image" />
+                <div class="hero-content show">
+                    <h1 id="mission-title" class="hero-title show">Our Mission</h1>
+                    <p class="hero-description show">At i Cars, we believe that renting a car should be simple and stress-free. Our mission is to empower you to make informed choices about your transportation needs, so you can enjoy your journey with confidence. We're committed to providing personalized rental options that cater to your unique travel requirements, preferences, and lifestyle.
+                    </p>
+                </div>
+            </section>
+            <section class="content-section">
+            <header class="section-header">
+                <h2 class="section-title vani">Our Story, Your Journey</h2>
+            </header>
+
+            <div class="grid-section">
+                <div class="text-content">
+                    <h3 class="section-subtitle vani">
+                        Our Team
+                        <span class="yellow-underline vani" aria-hidden="true"></span>
+                    </h3>
+                    <p class="description vani">We're proud to have a diverse team of professionals who are passionate about travel and mobility. Our experienced rental agents, automotive experts, and customer service specialists work tirelessly to bring you the best car rental experience. Each member of our team brings unique expertise and creativity to the table, ensuring that our services are both efficient and enjoyable.
+                    </p>
+                </div>
+                <div class="image-wrapper vani">
+                    <img src="{% static '/car img/team.jpg' %}" alt="Our team of nutrition experts" class="section-image" />
+                </div>
+            </div>
+            <header class="section-header">
+                <h2 class="section-title vani">Our team of automotive experts</h2>
+            </header>
+            <div class="grid-section technology-section">
+                <div class="image-wrapper1 vani">
+                    <img src="{% static '/car img/engine.gif' %}" alt="Our technology platform" class="section-image" />
+                </div>
+                <div class="text-content vani">
+                    <h3 class="section-subtitle vani">
+                        Our Technology
+                        <span class="yellow-underline vani" aria-hidden="true"></span>
+                    </h3>
+                    <p class="description vani">We harness the power of technology to make car rental seamless and personalized. Our advanced platform takes into account your travel preferences, budget, and itinerary to create a rental plan that fits you perfectly. With our user-friendly interface, you can easily browse available vehicles, manage your bookings, and discover new travel destinations—all at your fingertips.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid-section values-section">
+                <div class="text-content vani">
+                    <h3 class="section-subtitle vani">
+                        Our Values
+                        <span class="yellow-underline vani" aria-hidden="true"></span>
+                    </h3>
+                    <p class="description vani">We believe that renting a car is a journey, not just a transaction. Our core values include sustainability, inclusivity, and education. We strive to promote eco-friendly transportation options that are good for you and the planet. We celebrate diversity and cater to a wide range of rental needs, from compact cars to luxury vehicles. We also aim to educate our community about the benefits of responsible travel, empowering you to make informed choices.
+                    </p>
+                </div>
+                <div class="image-wrapper vani">
+                    <img src="{% static '/car img/carvalues.jpg' %}" alt="Our values in action" class="section-image" />
+                </div>
+            </div>
+        </section>
+    </div>
+        <div id="contact1" class="hide">
+            <div class="container" style="width: 200vh;" role="main">
+                <div class="main-content">
+                  <img loading="lazy" src="{% static '/car img/thee2.jpg' %}"  class="background-image" alt="Contact Us Background Image"/>
+                  <div class="content-wrapper">
+                    <center><h1 class="contact-title show">Contact Us</h1></center>
+                    <div class="info-box">
+                      <div class="flex-container">
+                        <div class="left-column show2">
+                            <img src="{% static '/car img/thee2.jpg' %}" style="height: 900px; width:auto" alt="Contact Us Background Image">
+                        </div>
+                        <div class="right-column">
+                          <div class="team-info">
+                            <h2 class="team-title show1">OUR TEAM</h2>
+                            <div class="team-member-container show1">
+                              <h3 class="member-name ">ALDRIN JAISON</h3>
+                              <div class="contact-info">
+                                <i class="fa-brands fa-instagram"></i>
+                                <div class="contact-text">aldrin_jaison</div>
+                              </div>
+                              <button onclick="window.open('https://wa.me/+918943179187/?text=三 \\ō͡≡o˞̶) Haii ', '_blank');" class="whatsapp-button" aria-label="Contact Godson M.D. on WhatsApp">
+                                <i class="fa-brands fa-whatsapp"></i>
+                                <span class="phone-number">+91 8943179187</span>
+                              </button>
+                              
+                              <h3 class="member-name">ABDUL HALEEM M A</h3>
+                              <div class="social-container">
+                                <i class="fa-brands fa-instagram"></i>
+                                <div class="social-text">_.haleem___</div>
+                              </div>
+                              <button onclick="window.open('https://wa.me/+917025795082/?text=三 \\ō͡≡o˞̶) Haii ', '_blank');" class="whatsapp-button" aria-label="Contact M.S. Tharun on WhatsApp">
+                                <i class="fa-brands fa-whatsapp"></i>
+                                <span class="phone-number">+91 7025795082</span>
+                              </button>
+              
+                              <h3 class="member-name">ARJUN C</h3>
+                              <div class="social-container">
+                                <i class="fa-brands fa-instagram"></i>
+                                <div class="social-text">__arju_n___</div>
+                              </div>
+                              <button onclick="window.open('https://wa.me/+918136847095/?text=三 \\ō͡≡o˞̶) Haii ', '_blank');" class="whatsapp-button" aria-label="Contact M.S. Tharun on WhatsApp">
+                                <i class="fa-brands fa-whatsapp"></i>
+                                <span class="phone-number">+91 8136847095</span>
+                              </button>              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+        </div>
+        <div class="hide" id="sub1">
+            <section class="hero-section" aria-labelledby="mission-title">
+                <img src="{% static '/car img/curve road.webp'%}" alt="Healthy lifestyle background" class="hero-image" />
+                <div class="hero-content show">
+                    <h1  class="hero-title show" style="color: #F3E600;">Subscribe a Car</h1>
+                    <p class="hero-description show">i Cars is one of the most trusted car rental services as it is promoted by Indus Motors, the top Maruti dealership in India. The rent-a-car service provider offers an outstanding model and a wide variety of vehicle options at the most competitive rates.</p>
+                </div>
+            </section>
+            <section class="content-section">
+                <header class="section-header">
+                    <h2 class="section-title vani">Comparison b/w Subscription & Buying</h2><br>
+                    <p class="hero-description vani">
+                        A car subscription is a great option as it offers flexibility, convenience, and the ability to switch cars quickly with no long-term commitments and also doesn't require a large upfront payment such as insurance, road tax, and other payments which are required when buying a car.
+                    </p>
+                </header>
+            </section>
+            <section class="content-section">
+            <h4 class="section-title vani">You Will Get :</h4><br>
+            <table class="vani">
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Subscription</th>
+                <th>Buying</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Zero Down Payment & Roadtax</td>
+                <td class="check">✔️</td>
+                <td class="check">✔️</td>
+            </tr>
+            <tr>
+                <td>Annual Insurance Included</td>
+                <td class="check">✔️</td>
+                <td class="cross">❌</td>
+            </tr>
+            <tr>
+                <td>Free Service & Maintenance</td>
+                <td class="check">✔️</td>
+                <td class="cross">❌</td>
+            </tr>
+            <tr>
+                <td>Option to buy-out the car</td>
+                <td class="check">✔️</td>
+                <td class="cross">❌</td>
+            </tr>
+            <tr>
+                <td>Return or Rent Anytime</td>
+                <td class="check">✔️</td>
+                <td class="cross">❌</td>
+            </tr>
+            <tr>
+                <td>No Long Term Commitment</td>
+                <td class="check">✔️</td>
+                <td class="cross">❌</td>
+            </tr>
+            <tr>
+                <td>Doorstep Pick/ Drop for Maintenance & Service</td>
+                <td class="check">✔️</td>
+                <td class="cross">❌</td>
+            </tr>
+            <tr>
+                <td>Option to Switch Cars</td>
+                <td class="check">✔️</td>
+                <td class="cross">❌</td>
+            </tr>
+        </tbody>
+    </table>
+<br><br><br>
+<button class="submit-button" onclick="alert('You must be login');loginout()">Take Subscription</button>
+</section>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    let home=document.getElementById('home');
+    let about=document.getElementById('about');
+    let contact=document.getElementById('contact');
+    let sub=document.getElementById('sub');
+    let hdiv=document.getElementById('home1');
+    let adiv=document.getElementById('about1');
+    let cdiv=document.getElementById('contact1');
+    let sdiv=document.getElementById('sub1');
+    let bgc=document.getElementById('bgc');
+    let load=document.getElementById('loading');
+    
+    function homefn()
+    {
+        home.classList.add("navactive");
+        about.classList.remove("navactive");
+        contact.classList.remove("navactive");
+        sub.classList.remove("navactive");
+        sdiv.classList.add("hide");
+        hdiv.classList.remove("hide");
+        adiv.classList.add("hide");
+        cdiv.classList.add("hide");
+        load.style.display="none";
+        //document.body.style.overflow = 'hidden';
+        bgc.classList.add("black");
+        bgc.classList.remove("white");
+    }
+    function aboutfn()
+    {
+        home.classList.remove("navactive");
+        about.classList.add("navactive");
+        contact.classList.remove("navactive");
+        hdiv.classList.add("hide");
+        load.style.display="none";
+        adiv.classList.remove("hide");
+        cdiv.classList.add("hide");sub.classList.remove("navactive");
+        sdiv.classList.add("hide");
+        bgc.classList.add("white");
+        bgc.classList.remove("black");
+    
+    }
+    function contactfn()
+    {
+        home.classList.remove("navactive");
+        about.classList.remove("navactive");
+        contact.classList.add("navactive");
+        hdiv.classList.add("hide");
+        load.style.display="none";
+        adiv.classList.add("hide");
+        cdiv.classList.remove("hide");
+        sub.classList.remove("navactive");
+        sdiv.classList.add("hide");
+        bgc.classList.remove("white");
+        bgc.classList.add("black");
+    }
+    function subfn()
+    {
+        home.classList.remove("navactive");
+        about.classList.remove("navactive");
+        contact.classList.remove("navactive");
+        hdiv.classList.add("hide");
+        load.style.display="none";
+        adiv.classList.add("hide");
+        cdiv.classList.add("hide");
+        sub.classList.add("navactive");
+        sdiv.classList.remove("hide");
+        bgc.classList.add("white");
+        bgc.classList.remove("black");
+    }
+    function loginout()
+    {
+        
+        homefn();
+        window.scrollBy(0, window.innerHeight);
+        document.getElementById("loginForm").style.display="block";
+        window.scrollBy(0, window.innerHeight);
+        window.scrollBy(0, window.innerHeight);
+    }
+
+   setTimeout(homefn,5000);
+        </script>
+</html>

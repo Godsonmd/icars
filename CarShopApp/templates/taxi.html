@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/@turf/turf"></script>
+    <title>i cars | Taxi Booking</title>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="main-wrapper">
+          <img src="{% static '/car img/taxi bg.jpeg' %}" alt="Background car image" class="background-image" />
+          <nav class="nav-container" role="navigation" aria-label="Main navigation">
+            <div class="nav-links show1">
+              <div class="brand-logo">i CARS</div>
+            </div>
+            <button class="cta-button show2" onclick="window.history.back();" aria-label="Buy Now">Back</button>
+          </nav>
+          <main class="content-wrapper">
+            <div class="container">
+              <h2>Book a taxi in India !</h2>
+            <div class="form-container show1" id="signupForm">
+                <form  method="post" enctype="multipart/form-data" onsubmit="alert('Taxi sucessfully booked in {{state}}\nCash dealings are in offline meet')">
+                   {% csrf_token %}                   
+                   <label for="plc">
+                     Choose your pick up location :
+                     <select name="pickupl" id="plc" required onchange="lfn();">
+                       
+                      <option selected value="MyL">My current location</option>       
+                      <option value="ChooseL">Choose a location</option>
+                      <option value="YourL">icars's office center in {{state}}</option>
+                    </select>
+                   </label>
+                   <span id="lstate"></span>
+                   <input type="hidden" id="lat" name="lat">
+                   <input type="hidden" id="long" name="long"><br>
+                   <label for="pickup">Pickup Date & Time:</label>
+        <input type="datetime-local" id="pickup" name="pickup" required>
+        
+        <label for="dropdown">No.of peoples:</label>
+        <input type="number" id="noP" name="noP" max="8" min="1" required>
+        
+        
+        <button type="submit" class="button">Book Taxi</button>
+                </form>
+                </div>  
+            </div>                              
+            <div class="form-container show1" id="map" style="width: 500px; height:600px; display:none"></div>                            
+          </main>
+      </div>
+  </div>
+</body>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script> -->
+    <script>
+      let lat=document.getElementById("lat");
+      let long=document.getElementById("long");
+      var latitude = 10.67936659408776556;
+      var longitude = 76.13667011260987749;
+      function setMinDateTime() {
+          const now = new Date();
+          now.setMinutes(now.getMinutes() + 30);
+          const year = now.getFullYear();
+          const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+          const day = String(now.getDate()).padStart(2, '0');
+          const hours = String(now.getHours()).padStart(2, '0');
+          const minutes = String(now.getMinutes()).padStart(2, '0');
+
+          // Set the pickup field to the current date and time
+          const minDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+          const pickupInput = document.getElementById('pickup');
+          pickupInput.setAttribute('min', minDateTime);
+          
+          pickupInput.value = minDateTime; // Set default value
+          
+          // Set the dropdown min to one day after the pickup
+         
+      }
+
+      window.onload = setMinDateTime;
+      function showl()
+      {
+          window.open('https://www.google.com/maps?q='+lat.value+','+long.value,'_blank');
+      }
+     
+      function gmap() {
+          if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(showPosition, showError);
+          } else {
+             alert("Geolocation is not supported by this browser.");
+          }
+        };
+        
+        function showPosition(position) {
+           latitude = position.coords.latitude;
+           longitude = position.coords.longitude;
+          lat.value=latitude;
+          long.value=longitude;
+          
+          setTimeout(function(){lstate.innerHTML="Current Location successfully fetched ✅ <br>";},1000);
+        }
+        
+        function showError(error) 
+        {    
+               
+               setTimeout(function(){lstate.innerHTML="Location not found ❌ <br>";},1000);
+               alert("Location information is unavailable. reason: "+error);          
+        }
+        function mapping(){
+          document.getElementById('map').style.display="block";
+          var map = L.map('map').setView([latitude, longitude], 17); // Centered on India
+  
+          // Add OpenStreetMap tile layer
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              maxZoom: 19,
+              attribution: '© OpenStreetMap'
+          }).addTo(map);
+          
+          // Add a marker on click
+          map.on('click', function(e) {
+              // Get the latitude and longitude
+              latitude= e.latlng.lat;
+              longitude = e.latlng.lng;
+  
+              // Clear previous markers
+              map.eachLayer(function(layer) {
+                  if (layer instanceof L.Marker) {
+                      map.removeLayer(layer);
+                  }
+              });
+  
+              // Add a new marker
+              
+              // Display the coordinates
+              
+                lat.value=latitude.toFixed(17);
+                long.value=longitude.toFixed(17);
+                var marker = L.marker([latitude, longitude]).addTo(map);
+              setTimeout(function(){document.getElementById('map').style.display="none";},1000);
+              setTimeout(function(){lstate.innerHTML="Location successfully fetched ✅ <br>";},1000);
+
+            
+              
+              
+          });}
+          function lfn(){
+            let ss=plc.value;
+            lstate.innerHTML="Loading...<br>";
+          if(ss=="MyL")              
+            gmap();
+          else if(ss=="ChooseL")
+          mapping();
+            else
+            {
+            setTimeout(function(){lstate.innerHTML="Location successfully fetched ✅ <br>";
+            },1000);}
+          }
+          gmap();
+  </script>
+    <style>
+    :root {
+      --primary-color:#ea454c;
+      --secondary-color: rgb(135, 68, 68);
+      --text-color: #000;
+      --white: #fff;
+      --border-color: rgb(216, 218, 220);
+      --focus-outline: 3px solid #4D90FE;
+    }
+    .handle{
+      display: flex;
+      gap: 50px;
+      justify-content: space-around;
+      max-width: 44.75rem;
+      color: white;
+      
+  }
+  .radiotype{
+      display: block;
+      cursor: pointer;
+      font-weight: bolder;
+      font-size: 25px;
+      text-shadow: none;
+      
+  }
+  .radiotype input[type="radio"]{
+      display: none;
+  }
+  .radiotype input[type="radio"]:checked + span{
+      color: white;
+      text-shadow: 0 0 10px red, 0 0 20px red, 0 0 40px red, 0 0 80px red,0 0 160px red;
+  }
+  .radiotype span:hover{
+      color: red;
+      transition: color 2s;
+  }
+    .vani{
+      animation: vv both;
+      animation-timeline: view(75% 25%);
+     }
+     @keyframes vv{
+      from{
+          opacity: 0;
+          transform: translateY(200px) scale(0.3);
+      } 
+      to{
+          opacity: 1;
+          transform: translateY(0px) scale(1);
+      }            
+     }
+     
+     .show{
+      animation: ss 2s   1 ease ;
+     }
+     @keyframes ss{
+      from{
+          opacity: 0;
+          transform: translateY(50px) scale(0.3);
+      } 
+      to{
+          opacity: 1;
+          transform: translateY(0px);
+      }            
+     }
+     .show1{
+      animation: sss 2s   1 ease ;
+     }
+     @keyframes sss{
+      from{
+          opacity: 0;
+          transform: translateX(-50px);
+          
+      } 
+      to{
+          opacity: 1;
+          transform: translateX(0px);
+      }            
+     }
+     .show2{
+      animation: ssss 2s   1 ease ;
+     }
+     @keyframes ssss{
+      from{
+          opacity: 0;
+          transform: translateX(50px);
+          
+      } 
+      to{
+          opacity: 1;
+          transform: translateX(0px);
+      }            
+     }
+    .tc-link{
+      text-decoration: none;
+      color: white;
+      transition: all 1s;
+    }
+    .tc-link:hover{
+      text-decoration: underline;
+      color: red;
+  }
+    .signup-container {
+      background-color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 60vh;
+    }
+    body{
+      background-color: #000;
+    }
+    body::-webkit-scrollbar{
+      display: none;
+    }
+    .form-container::-webkit-scrollbar{
+      display: none;
+    }
+    .main-wrapper {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      min-height: 99vh;
+      width: 100%;
+    }
+    
+    .background-image {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      width: 100%;
+      object-fit:cover;
+      object-position: center;
+    }
+    
+    .nav-container {
+      position: relative;
+      background-color: transparent;
+      border-bottom: 2px solid white;
+      display: flex;
+      width: 100%;
+      gap: 20px;
+      font-family: Roboto, system-ui, sans-serif;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 1rem 5rem 1rem 1.125rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2.5rem 3.625rem;
+      font-size: 1.25rem;
+      color: white;
+      font-weight: 400;
+      line-height: 1.2;
+      flex-wrap: wrap;
+      margin: auto 0;
+      align-items: center;
+    }
+    
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    
+    .nav-link:hover,
+    .nav-link:focus {
+      color: var(--primary-color);
+      outline: none;
+      text-decoration: none;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #ea454c;
+      transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus::after {
+      width: 100%;
+  }
+    .nav-link:focus-visible {
+      outline: var(--focus-outline);
+      outline-offset: 2px;
+    }
+    
+    .brand-logo {
+      text-transform: lowercase;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: 5.4px;
+      text-align: center;
+      border: white;
+      padding: 0.5rem 1rem;
+      
+    }
+    
+    .cta-button {
+      background-color: black;
+      color: var(--white);
+      padding: 0.75rem 2rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.5s; /* Adjusted duration */
+      /*border-top-left-radius: 40px;
+      border-bottom-left-radius: 40px;*/
+      clip-path: polygon(0 50%, 20% 0,100% 0, 100% 100%, 20% 100%,0 50%);
+      border: 2px solid white;
+      transform: translateX(20px);
+      width: 180px; /* Set an initial width */
+  }
+  
+  .cta-button:hover,
+  .cta-button:focus {
+      background-color: red;
+      width: 200px; /* Target width on hover */
+  }
+    
+    .content-wrapper {
+      position: relative;
+      align-self: center;
+      width: 100%;
+      max-width: 1440px;
+      margin: auto;
+      padding: 2rem;
+      display:flex;
+      gap: 20px;
+      flex: 1;
+      color: #fff;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      width: 80%;
+      max-width: 600px;
+      margin-top: 20px;
+      }
+     
+    .form-container {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      height: 320px;
+      border-radius: 10px;
+      font-size: 20px;
+      border: 1px solid aqua;
+      margin-bottom: 20px;
+      overflow-y: auto;        
+      }
+    input,select{
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid aqua;
+      background-color: white;
+      color: black;
+      border-radius: 5px;
+      appearance:none;
+      }
+      select {
+          width: 525px;
+          color: black;            
+      }
+
+      .button {
+          background-color: rgba(0, 150, 150, 0.7);
+          color: white;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 16px;
+          width: 525px;
+          margin-bottom: 10px;
+          }
+         
+         
+          .button:hover {
+          background-color: rgba(0, 150, 150, 1);
+          }
+    </style>
+</html>

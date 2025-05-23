@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reset your password - Arogya Health and Wellness">
+    <title>Reset Password | iCars</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700&family=Poppins:wght@500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+</head>
+<body>
+    <div class="forgot-password-container" role="main">
+        <div class="main-content">
+            <img 
+                loading="lazy" 
+                src="{% static '/car img/car back.jpg' %}"
+                alt="Wellness background" 
+                class="background-image"
+            />
+            
+            <header class="header" role="banner">
+                <nav class="nav-links show1" role="navigation" aria-label="Main navigation">
+                    <div class="brand-logo">
+                        <a class="logo-link" aria-label="Arogya home">arogya</a>
+                    </div>
+                    <ul class="nav-menu ">
+                        <li><a href="/login" class="nav-link">Home</a></li>
+                        <li><a href="/" class="nav-link">About</a></li>
+                        <li><a href="/" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                <a onclick="window.location.href='/'" class="cta-button show2" role="button">Back</a>
+            </header>
+            
+            <main class="main-section">
+                <h1 class="page-title show">Forgot Password</h1>
+                <p class="subtitle show2" id="form-description">Please enter your email to change password</p>
+                
+                <div class="form-column">
+                    <form class="signup-form show"  autocomplete="on" method="POST" onsubmit="document.getElementById('sbtn').innerText='Sending... OTP';">
+                    {% csrf_token %}
+                      <div class="handle">
+                        <label for="customer" class="radiotype">
+                        <input type="radio" name="handle" checked value="customer" id="customer">
+                       <span>
+    
+                           Customer
+                       </span> 
+                    </label>
+                        <label for="client" class="radiotype">
+                        <input type="radio" name="handle" value="client" id="client">                        
+                    <span>
+    
+                        Client
+                    </span>    
+                    </label>
+                </div><br>
+                
+                      <div class="form-group">
+                        <label for="email" class="form-label">Email address</label>
+                        <input 
+                          type="email" 
+                          id="email" 
+                          name="email"
+                          class="input-field" 
+                          required 
+                          aria-required="true"
+                          autocomplete="email"
+                          size="50"
+                        />
+                      </div>
+                      
+                      <button type="submit" id="sbtn" class="submit-button">Send OTP</button>
+                    </form>
+                  </div>
+                
+                <p class="motivational-quote show2" role="text">
+                    "You don't have to be extreme, just consistent"
+                </p>
+            </main>
+        </div>
+    </div>
+
+    <style>
+        :root {
+            --primary-color: #5caa47;
+            --primary-hover: #4a8939;
+            --text-color: #000;
+            --white: #fff;
+            --gray: #cfc9c9;
+            --border-color: #d8dadc;
+            --error-color: #dc3545;
+            --focus-outline: #4a8939;
+            --focus-ring: 0 0 0 3px rgba(74, 137, 57, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .vani{
+            animation: vv both;
+            animation-timeline: view(75% 25%);
+           }
+           @keyframes vv{
+            from{
+                opacity: 0;
+                transform: translateY(200px) scale(0.3);
+            } 
+            to{
+                opacity: 1;
+                transform: translateY(0px) scale(1);
+            }            
+           }
+           
+           .show{
+            animation: ss 2s   1 ease ;
+           }
+           @keyframes ss{
+            from{
+                opacity: 0;
+                transform: translateY(50px) scale(0.3);
+            } 
+            to{
+                opacity: 1;
+                transform: translateY(0px);
+            }            
+           }
+           .show1{
+            animation: sss 2s   1 ease ;
+           }
+           @keyframes sss{
+            from{
+                opacity: 0;
+                transform: translateX(-50px);
+                
+            } 
+            to{
+                opacity: 1;
+                transform: translateX(0px);
+            }            
+           }
+           .show2{
+            animation: ssss 2s   1 ease ;
+           }
+           @keyframes ssss{
+            from{
+                opacity: 0;
+                transform: translateX(50px);
+                
+            } 
+            to{
+                opacity: 1;
+                transform: translateX(0px);
+            }            
+           }
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.5;
+            color: var(--text-color);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .forgot-password-container {
+            background-color: var(--text-color);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        .header {
+            background-color: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            height: 70px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .logo-link {
+            font: 700 1.25rem 'Poppins', sans-serif;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus {
+            color:#dc3545;
+            text-decoration: none;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #ea454c;
+            transition: width 0.3s ease;
+        }
+  
+        .nav-link:hover::after,
+        .nav-link:focus::after {
+            width: 100%;
+        }
+        .cta-button {
+            background-color: var(--text-color);
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.75rem 2rem;
+            font: 500 1rem 'Roboto', sans-serif;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .cta-button:hover,
+        .cta-button:focus {
+            background-color: var(--primary-hover);
+            outline: none;
+            box-shadow: var(--focus-ring);
+        }
+
+        .main-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .page-title {
+            color: var(--white);
+            font: 700 3rem/1.3 'Poppins', sans-serif;
+            margin-top: 6rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            color: var(--gray);
+            font: 500 1.5rem/1.4 'Inter', sans-serif;
+            margin-top: 1.5rem;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+            margin-top: 3rem;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font: 500 1.125rem 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background-color: var(--white);
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: var(--focus-ring);
+        }
+
+        .email-input::placeholder {
+            color: #757575;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            min-height: 1.25rem;
+            font-weight: 500;
+        }
+
+        .submit-button {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            padding: 1.25rem;
+            font: 600 1.125rem 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-button:hover,
+        .submit-button:focus {
+            background-color: var(--primary-hover);
+            outline: none;
+            box-shadow: var(--focus-ring);
+            transform: translateY(-1px);
+        }
+
+        .submit-button:active {
+            transform: translateY(1px);
+        }
+
+        .motivational-quote {
+            color: var(--white);
+            font: 700 2.5rem 'Montserrat', sans-serif;
+            text-align: center;
+            margin-top: auto;
+            padding: 3rem 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        .handle{
+            display: flex;
+            gap: 50px;
+            justify-content: space-around;
+            max-width: 44.75rem;
+            color: white;
+            
+        }
+        .radiotype{
+            display: block;
+            cursor: pointer;
+            font-weight: bolder;
+            font-size: 25px;
+            text-shadow: none;
+            
+        }
+        .radiotype span{
+
+            color: white;
+        
+        }
+        .radiotype input[type="radio"]{
+            display: none;
+        }
+        .radiotype input[type="radio"]:checked + span{
+            color: white;
+            text-shadow: 0 0 10px red, 0 0 20px red, 0 0 40px red, 0 0 80px red,0 0 160px red;
+        }
+        .radiotype span:hover{
+            color: red;
+            transition: color 2s;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                flex-wrap: wrap;
+                height: auto;
+            }
+
+            .nav-links {
+                flex-basis: 100%;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+            }
+
+            .page-title {
+                font-size: 2.25rem;
+                margin-top: 4rem;
+            }
+
+            .subtitle {
+                font-size: 1.25rem;
+            }
+
+            .motivational-quote {
+                font-size: 2rem;
+                padding: 2rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            .page-title {
+                font-size: 1.875rem;
+            }
+
+            .subtitle {
+                font-size: 1.125rem;
+            }
+
+            .motivational-quote {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        @media screen and (forced-colors: active) {
+            .submit-button {
+                border: 2px solid currentColor;
+            }
+        }
+        .content-wrapper {
+            position: relative;
+            align-self: center;
+            width: 100%;
+            max-width: 1440px;
+            margin: auto;
+            padding: 2rem;
+            flex: 1;
+          }
+          
+          .content-grid {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            height: 100%;
+          }
+          
+          .form-column {
+            flex: 0 1 37%;
+            min-width: 320px;
+          }
+          
+          .signup-form {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 1rem;
+            color: var(--white);
+            font-family: Inter, system-ui, sans-serif;
+          }
+          
+          .form-title {
+            font-family: Poppins, system-ui, sans-serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.36px;
+            text-align: center;
+            margin-bottom: 2rem;
+          }
+          
+          .form-group {
+            margin-bottom: 1.5rem;
+          }
+          
+          .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+          }
+          
+          .input-field,
+          .password-field {
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.625rem;
+            background-color: var(--white);
+            color: var(--text-color);
+            font-size: 1rem;
+          }
+          
+          .password-field {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+          }
+          
+          .password-field input {
+            flex: 1;
+            border: none;
+            background: none;
+            padding: 0;
+            color: var(--text-color);
+          }
+          
+          .password-toggle-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+          }
+          
+          .password-toggle {
+            width: 1.25rem;
+            height: 1.25rem;
+            object-fit: contain;
+          }
+          
+          .terms-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+          }
+          
+          .terms-checkbox {
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+          }
+          
+          .terms-label {
+            font-size: 0.875rem;
+            cursor: pointer;
+          }
+          
+          .submit-button {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 0.625rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+          }
+          
+          .submit-button:hover,
+          .submit-button:focus {
+            background-color: var(--secondary-color);
+            outline: none;
+          }
+          
+          .submit-button:focus-visible {
+            outline: var(--focus-outline);
+            outline-offset: 2px;
+          }
+          
+          .quote-column {
+            flex: 0 1 63%;
+          }
+          
+          .quote-text {
+            color: var(--white);
+            font-family: Montserrat, system-ui, sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-align: center;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+          }
+          
+          .bold-text {
+            font-weight: 800;
+          }
+          
+          @media (max-width: 1200px) {
+            .content-grid {
+              gap: 1rem;
+            }
+            
+            .quote-text {
+              font-size: 2rem;
+            }
+          }
+          
+          @media (max-width: 991px) {
+            .nav-container {
+              padding: 1rem;
+            }
+            
+            .content-grid {
+              flex-direction: column;
+            }
+            
+            .form-column,
+            .quote-column {
+              flex: 0 1 100%;
+              width: 100%;
+            }
+            
+            .signup-form {
+              max-width: 480px;
+              margin: 0 auto;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            .nav-links {
+              gap: 1rem;
+              font-size: 1rem;
+            }
+            
+            .form-title {
+              font-size: 1.75rem;
+            }
+            
+            .quote-text {
+              font-size: 1.5rem;
+            }
+          }
+          
+          @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+              animation-duration: 0.01ms !important;
+              animation-iteration-count: 1 !important;
+              transition-duration: 0.01ms !important;
+              scroll-behavior: auto !important;
+            }
+          }
+          blockquote span{
+            transition: 1s;
+            color: red;
+          }
+          blockquote:hover{
+            transition: 1.5s;
+            font-size: 400%;
+             
+          }
+    </style>
+</body>
+<script>
+    function sending(){
+        document.getElementById("submit").innerText="Sending...";
+    }
+</script>
+</html>

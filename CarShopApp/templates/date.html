@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Form</title>
+    <script>
+        function setMinDateTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+
+            // Set the pickup field to the current date and time
+            const minDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+            const pickupInput = document.getElementById('pickup');
+            pickupInput.setAttribute('min', minDateTime);
+            document.getElementById('dropdown').setAttribute('min', minDateTime);
+            pickupInput.value = minDateTime; // Set default value
+            
+            // Set the dropdown min to one day after the pickup
+            pickupInput.addEventListener('change', function() {
+                const pickupDate = new Date(pickupInput.value);
+                pickupDate.setDate(pickupDate.getDate() + 1); // Add one day
+                const dropdownMinDateTime = `${pickupDate.getFullYear()}-${String(pickupDate.getMonth() + 1).padStart(2, '0')}-${String(pickupDate.getDate()).padStart(2, '0')}T${String(pickupDate.getHours()).padStart(2, '0')}:${String(pickupDate.getMinutes()).padStart(2, '0')}`;
+                document.getElementById('dropdown').setAttribute('min', dropdownMinDateTime);
+                document.getElementById('dropdown').value=dropdownMinDateTime;
+            });
+        }
+
+        window.onload = setMinDateTime; // Call the function when the page loads
+    </script>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <label for="pickup">Pickup:</label>
+        <input type="datetime-local" id="pickup" name="pickup" required>
+        
+        <label for="dropdown">Dropdown:</label>
+        <input type="datetime-local" id="dropdown" name="dropdown" required>
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

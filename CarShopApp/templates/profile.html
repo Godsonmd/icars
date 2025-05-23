@@ -1,0 +1,2500 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete your profile and choose your body type">
+    <title>i cars</title>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700&family=Public+Sans:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-black: #000000;
+            --primary-white: #FFFFFF;
+            --accent-red: #833636;
+            --border-gray: #D8DADC;
+            --card-bg: #1B1B1B;
+            --dropdown-bg: rgba(255, 255, 255, 0.83);
+            --focus-outline: rgba(131, 54, 54, 0.5);
+            --hover-red: #6a2c2c;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --primary-color: #ea454c;
+            --dark-bg: #1e1e1e;
+            --white: rgba(255, 255, 255, 1);
+            --shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            color: var(--primary-white);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            user-select: none;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background-color: var(--primary-white);
+            padding: 1rem 5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px var(--shadow-color);
+            cursor: pointer;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            gap: 3.625rem;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: 5.4px;
+            color: var(--primary-black);
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+       
+        .nav-links {
+            display: flex;
+            gap: 3.625rem;
+            list-style: none;
+            cursor: pointer;
+          }
+          
+          .nav-link {
+          appearance:none ;
+            color: var(--primary-black);
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-family: 'Roboto', sans-serif;
+            transition: color 0.3s ease;
+          text-align:left;
+          position: relative;
+            border: none;
+        }
+        .nav-link:hover{
+            color: #00ffff;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #00ffff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link:focus{
+          appearance: none;
+        }
+        .buy-now-btn {
+            background-color: #40BFA8;
+            color: white;
+            border: none;
+            padding: 0.75rem 3.125rem;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: 'Roboto', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .buy-now-btn:hover,
+        .buy-now-btn:focus {
+            background-color: var(--hover-red);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        /*.main-container {
+            width: 80rem;
+            margin: 7rem auto 0;
+            top: 0;
+            border: 2px solid aqua;
+        }*/
+        .main-container {
+          width: 73.5rem;
+          height: 90vh;
+          margin: 7rem auto 0;
+          top: 0;
+          position: absolute; /* Change to absolute for positioning */
+          right: 0; /* Initially position it to the right */
+          transition: all 0.3s ease; /* Smooth transition */
+          overflow-y: auto;
+      }
+      .main-container::-webkit-scrollbar{
+        display: none;
+      }
+      .main-container.centered {
+        top: 80%; /* Position it at the bottom */
+        left: 50%; /* Center it horizontally */
+        transform: translateX(-50%); /* Adjust for centering */
+    }
+
+        .section-title1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.36px;
+            text-align: center;
+            margin: 3.5rem 0;
+            color: var(--primary-white);
+            position: relative;
+        }
+
+        
+
+        .form-group {
+            display: grid;
+            grid-template-columns: 9.375rem 1fr;
+            gap: 1.25rem;
+            margin-bottom: 2.625rem;
+            max-width: 46.875rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-label {
+            font-family: 'Public Sans', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.32px;
+            align-self: center;
+        }
+
+        .form-input {
+            background-color: var(--primary-black);
+            border: 1px solid var(--border-gray);
+            border-radius: 0.625rem;
+            padding: 2.125rem 1rem;
+            color: var(--primary-white);
+            font-size: 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            color: aqua;
+            border-color: aqua;
+            box-shadow: 0 0 0 3px aqua;
+        }
+
+        .form-input:hover {
+            border-color: aqua;
+            color: aqua;
+        }
+
+        
+
+        .continue-btn {
+            display: block;
+            width: 22.0625rem;
+            margin: 5rem auto 2rem;
+            padding: 1.25rem 0;
+            background-color: var(--primary-black);
+            color: var(--primary-white);
+            border: 1px solid var(--primary-white);
+            border-radius: 0.625rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .continue-btn:hover {
+            
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--shadow-color);
+            border-color: aqua;
+            color: aqua;
+        }
+
+        @media (max-width: 64rem) {
+            .header {
+                padding: 1rem 2rem;
+            }
+
+            .nav-content {
+                gap: 2rem;
+            }
+
+            .nav-links {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 48rem) {
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1.25rem;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                gap: 1.25rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1.25rem;
+                text-align: center;
+            }
+
+            .form-group {
+                grid-template-columns: 1fr;
+            }
+
+            .body-type-label {
+                flex-direction: column;
+                gap: 1.25rem;
+                text-align: center;
+                padding: 1.5rem;
+            }
+
+            .activity-wrapper {
+                flex-direction: column;
+                gap: 1.25rem;
+            }
+
+            .continue-btn {
+                width: 100%;
+                max-width: 22.0625rem;
+            }
+
+            .section-title {
+                font-size: 1.875rem;
+            }
+
+            .form-label {
+                font-size: 1.5rem;
+            }
+
+            .body-type-text {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+        .arrowicon{
+            position: absolute;
+            width: 50px;
+            height: 100%;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top-right-radius: 14px;
+            border-bottom-right-radius: 14px;
+            background-color: #b4b6b8;
+          }
+          .arrowicon i{
+            font-size: 25px;
+            color: black;
+            transition: all 0.2s;
+          }
+          .up{
+            transform: rotate(180deg);
+          }
+          header label input[type="checkbox"]{
+            display: none;
+          }
+          
+          
+          .dpdiv{
+            margin-left: 40%;
+          }
+          .dpdiv label i{
+            transform: translate(-50px,-10px);
+          }
+          .dpdiv label i:hover{
+            transition: 2s;
+            transform: translate(-49px,-9px);
+            color: #000000;
+            text-shadow: 0 0 10px aqua, 0 0 20px aqua, 0 0 40px aqua, 0 0 80px aqua, 0 0 160px aqua;
+          }
+          
+          .dpimg{
+            width: 200px;
+            height: 200px;
+            object-fit:fill;
+            border-radius: 50%;
+            border: 2px solid white;
+            transition: all 2s;
+          }
+          .dpimg:hover{
+            box-shadow: 0 0 10px aqua, 0 0 20px aqua, 0 0 40px aqua, 0 0 80px aqua, 0 0 160px aqua;
+            border: 2px solid aqua;
+          }
+          
+          .form-label input[type="file"]{
+            display: none;
+          }
+          .hide{
+            display: none;
+          }
+          .addbutton{
+            transform: translate(600px);
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            padding: 1px;
+            font-weight: bold;
+            border: none;
+          }
+          .addbutton:hover{
+            border: 1px solid white;
+            background: transparent;
+            color: white;
+            transition: all 1s;
+          }
+          .dldivs{
+            display: flex;
+            margin-left: 20%;
+            gap: 20px;
+          }
+          .dldivs span{
+            color: white;
+            font-family: 'Public Sans', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.32px;
+            align-self: center;
+            transform: translateY(10%);
+            border: white;
+          }
+          .dlimg{
+            width: 400px;
+            height: 200px;
+            object-fit:fill;
+            border: 2px solid white;
+            transition: all 2s;
+
+          }
+          .dlimg:hover{
+            border: 2px solid aqua;
+            transform:  scale(1.11);
+
+          }
+          center h2{
+            color: white;
+            font-family: 'Public Sans', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.32px;
+            align-self: center;
+          }
+          .profile{
+            display: flex;
+
+          }
+          .pronav{
+            border: 2px solid aqua;
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            height: 100%;
+            
+            padding-bottom: 20px;
+          }
+          .dpdiv1{
+            margin-top: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+          .sidenav{
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            gap:2rem;
+          }
+          .sidebtn{
+            padding: 5px;
+            width: 70%;
+            border: 2px solid white;
+            background: transparent;
+            color: #FFFFFF;
+            text-align: center;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            border-bottom-right-radius: 40px;
+            border-bottom-left-radius: 40px;
+            user-select: none;
+          }
+          .sidenav .sidebtn:hover{
+            transform: translateY(-2px);
+          }
+          .sidenav input[type="radio"]{
+            display: none;
+          }
+          
+          .sidenav input[type="radio"]:checked+label{
+            border: 2px solid blue;
+            color: blue;
+          }
+          .sidebtn:active{
+           opacity: 0.6;
+          }
+          .sidenav button{
+            border: 2px solid red;
+            color: red;
+            font-size: 14px;
+          }
+          #loading{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0000004e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 100px;
+            
+         }
+         
+         #loading  .a{
+            border: 8px solid transparent;
+            background: transparent;
+            border-radius: 50%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateZ(90px);
+            font-size: 20px;
+            width: 50px;
+            height: 50px;
+            color: white;
+            animation: spin2 2s  ease-in-out forwards infinite;
+         }
+         @keyframes spin {
+            0%,100% { 
+                transform: rotate(0deg);
+                border-top: 8px solid red ;
+                border-bottom:8px solid red;
+            }
+            
+            50% { 
+                
+                transform: rotate(360deg);
+                border-top:  8px solid aqua;
+                border-bottom: 8px solid aqua;
+            }
+        }
+        @keyframes spin2 {
+            0%,100% { 
+                transform: rotate(0deg);
+                box-shadow: 0 0 10px aqua, 0 0 20px aqua, 0 0 40px aqua, 0 0 80px aqua, 0 0 160px aqua;
+                background-color: aqua;
+            }
+            
+            50% { 
+                
+                transform: rotate(360deg);
+                background-color: red;
+                box-shadow: 0 0 10px red, 0 0 20px red, 0 0 40px red, 0 0 80px red, 0 0 160px red;
+
+            }
+        }
+        .black{
+            background-color: #000000;
+        }
+        .white{
+            background-color: #FFFFFF;
+        }
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .herosection {
+            position: relative;
+            z-index: 1;
+            transform: translateY(100px);
+            text-align: center;
+            margin: clamp(2rem, 8vh, 5rem) 0;
+            perspective: 100vh;
+            background-color: #0000004e;
+        }
+
+        .herotitle {
+            font-size: 10vw;
+            letter-spacing: clamp(0.5rem, 2vw, 1.6rem);
+            text-transform: uppercase;
+            font-family: Arial Black;
+            margin-bottom: 1rem;
+          color: #fff;
+          transition: 2s; 
+            
+        }
+        .herotitle::first-letter{
+          text-transform:lowercase;
+        }
+        
+        .herotitle:hover{
+            font-size: clamp(2.5rem, 10vw, 70rem);
+        }  
+        .herosubtitle {
+            font-size: clamp(2rem, 8vw, 4.375rem);
+            letter-spacing: clamp(0.3rem, 1.5vw, 0.83rem);
+            text-transform: uppercase;
+              margin-bottom: 1.5rem;
+            transition: 2s;
+            color: #fff;
+        }
+
+        .herodescription {
+            font-size: clamp(1.5rem, 4vw, 2.625rem);
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 90%;
+            margin: 0 auto;
+            color: #fff;
+        }
+        .submit-button {
+          display: inline-block;
+          
+            padding: 1rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-left: 10%;
+        }
+        .submit-button:hover{
+            background: red;
+        }
+        .submit-button:active{
+            opacity: 0.46;
+        }
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            background: rgba(0,0,0,0.7);
+            padding: 4rem;
+            height: 100vh;
+            width: 250vh;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-description {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .content-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 3rem;
+            color: black;
+            margin-bottom: 1rem;
+        }
+
+        .grid-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 8rem;
+            min-height: 500px;
+        }
+
+        .text-content {
+            position: relative;
+        }
+
+        .section-subtitle {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 2.5rem;
+            color: black;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .yellow-underline {
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 200px;
+            height: 3px;
+            background: #F3F25B;
+        }
+
+        .description {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.2rem;
+            color: #0A2B45;
+            line-height: 1.8;
+        }
+
+        .image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgb(0, 0, 0);
+        }
+        .image-wrapper1 {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgb(0, 0, 0);
+            border-radius: 50%;
+        }
+        .section-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .technology-section {
+            text-align: right;
+        }
+
+        .technology-section .yellow-underline {
+            right: 0;
+            left: auto;
+        }
+
+        .technology-section .image-wrapper {
+            background: #FFF1C1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .values-section {
+            margin-top: 8rem;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-description {
+                font-size: 1.2rem;
+            }
+
+            .grid-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .technology-section {
+                text-align: left;
+            }
+
+            .technology-section .yellow-underline {
+                left: 0;
+                right: auto;
+            }
+
+            .image-wrapper {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-wrapper {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-content {
+                padding: 2rem;
+                
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.8rem;
+            }
+
+            .image-wrapper {
+                height: 300px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+          }
+        
+          .main-content {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            min-height: 1024px;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            padding: 112px 80px;
+          }
+        
+          .background-image {
+            position: absolute;
+            inset: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+          }
+        
+          .content-wrapper {
+            position: relative;
+            display: flex;
+            margin-bottom: -23px;
+            width: 100%;
+            max-width: 1196px;
+            flex-direction: column;
+          }
+        
+          .contact-title {
+            color: rgba(255, 255, 255, 1);
+            text-align: center;
+            align-self: center;
+            margin-left: 18px;
+            font: 700 48px Poppins, sans-serif;
+          }
+        
+          .info-box {
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 1);
+            box-shadow: 0px 0px 60px 30px rgba(0, 0, 0, 0.03);
+            margin-top: 61px;
+            padding: 10px 80px 10px 10px;
+            
+          }
+        
+          .flex-container {
+            gap: 20px;
+            display: flex;
+          }
+        
+          .left-column {
+            display: flex;
+            flex-direction: column;
+            line-height: normal;
+            width: 70%;
+            margin-left: 0px;
+          }
+        
+          .main-image {
+            aspect-ratio: 0.76;
+            object-fit: contain;
+            object-position: center;
+            width: 100%;
+            flex-grow: 1;
+          }
+        
+          .right-column {
+            display: flex;
+            flex-direction: column;
+            line-height: normal;
+            width: 30%;
+            margin-left: 20px;
+  
+          }
+        
+          .team-info {
+            display: flex;
+            margin-top: 6px;
+            flex-direction: column;
+          }
+        
+          .team-title {
+            color: rgba(152, 0, 30, 1);
+            text-align: center;
+            font-size:30px;
+            font:bolder;
+          }
+        
+          .team-member-container {
+            display: flex;
+            margin-top: 6px;
+            width: 100%;
+            flex-direction: column;
+            align-items: start;
+            padding: 0 11px;
+          }
+        
+          .member-name {
+            color: rgba(0, 0, 0, 1);
+            font: 400 30px Port Lligat Slab, -apple-system, Roboto, Helvetica, sans-serif;
+            margin: 32px 0 0 0;
+            transition: 3s;
+            cursor: default;
+          }
+          .member-name:hover{
+              color: red;
+              
+              
+          }
+          .member-name:first-child {
+            margin-top: 0;
+          }
+        
+          .contact-info,
+          .social-container,
+          .decorative-info {
+            display: flex;
+            gap: 17px;
+            margin: 28px 0 0 10px;
+            color: #ea454c;
+            font: 500 19px Poppins, sans-serif;
+            align-items: center;
+          }
+        
+          .whatsapp-button {
+            display: flex;
+            gap: 17px;
+            color: #ff7332;
+            margin: 6px 0 0 11px;
+            font: 400 16px Poppins, sans-serif;
+            align-items: center;
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+          }
+        
+          .whatsapp-button:hover {
+            background-color: #efa380;
+            color: white;
+            outline: 2px solid #ff7332;
+            outline-offset: 2px;
+          }
+        
+          .whatsapp-icon {
+            aspect-ratio: 1;
+            object-fit: contain;
+            object-position: center;
+            width: 19px;
+          }
+        
+          .text-button {
+            margin-top: 13px;
+          }
+        
+          .contact-icon,
+          .social-icon,
+          .decorative-icon {
+            aspect-ratio: 1;
+            object-fit: contain;
+            object-position: center;
+            width: 19px;
+          }
+        
+          .group-info {
+            display: flex;
+            margin-top: 20px;
+            gap: 17px;
+          }
+        
+          .group-item {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+          }
+        
+          .group-text-container {
+            display: flex;
+            flex-direction: column;
+            font-family: Poppins, sans-serif;
+            color: rgba(152, 0, 30, 1);
+          }
+        
+          .group-text-title {
+            font-size: 19px;
+            font-weight: 500;
+          }
+        
+          @media (max-width: 991px) {
+            .main-content {
+              padding: 100px 20px;
+            }
+        
+            .content-wrapper {
+              margin-bottom: 10px;
+            }
+        
+            .contact-title {
+              font-size: 40px;
+            }
+        
+            .info-box {
+              padding-right: 20px;
+              margin-top: 40px;
+            }
+        
+            .flex-container {
+              flex-direction: column;
+              gap: 0;
+            }
+        
+            .left-column,
+            .right-column {
+              width: 100%;
+              margin-left: 0;
+            }
+        
+            .main-image {
+              margin-top: 40px;
+            }
+        
+            .team-info {
+              margin-top: 40px;
+            }
+        
+            .contact-info,
+            .social-container,
+            .decorative-info {
+              white-space: normal;
+            }
+        
+            .whatsapp-button {
+              padding: 12px;
+            }
+          }
+        
+          @media (prefers-reduced-motion: reduce) {
+            .whatsapp-button {
+              transition: none;
+            }
+          }
+        
+          @media (hover: none) {
+            .whatsapp-button:hover {
+              background-color: transparent;
+            }
+          }
+           #contact1 .background-image {
+            width: 100%;
+           }
+           
+           
+           .show{
+            animation: ss 1s   1 ease ;
+           }
+           @keyframes ss{
+            from{
+                opacity: 0;
+                transform: translateY(50px) scale(0.3);
+            } 
+            to{
+                opacity: 1;
+                
+            }            
+           }
+           .show1{
+            animation: sss 3s   1 ease ;
+           }
+           @keyframes sss{
+            from{
+                opacity: 0;
+                transform: translateX(-50px);
+                
+            } 
+            to{
+                opacity: 1;
+                transform: translateX(0px);
+            }            
+           }
+           .show2{
+            animation: ssss 3s   1 ease ;
+           }
+           @keyframes ssss{
+            from{
+                opacity: 0;
+                transform: translateX(50px);
+                
+            } 
+            to{
+                opacity: 1;
+                
+            }            
+           }
+           .show3{
+            animation: sss3 2s   1 ease forwards;
+           }
+           @keyframes sss3{
+            from{
+                
+                
+              } 
+              to{
+                opacity: 1;
+                transform: translateX(-200px);
+                transform: translateY(100px);
+                transform: translateZ(100px);
+               
+
+                
+            }            
+           }
+           @keyframes color1 {
+            0%{text-shadow:0 0 10px red, 0 0 20px red, 0 0 40px red, 0 0 80px red, 0 0 160px red;
+              
+            }
+            25%{text-shadow:0 0 10px aqua, 0 0 20px aqua, 0 0 40px aqua, 0 0 80px aqua, 0 0 160px aqua;
+            
+        }
+        50%{text-shadow:0 0 10px green, 0 0 20px green, 0 0 40px green, 0 0 80px green, 0 0 160px green;
+          
+            }
+            75%{text-shadow:0 0 10px orange, 0 0 20px orange, 0 0 40px orange, 0 0 80px orange, 0 0 160px orange;
+            
+            }
+            100%{text-shadow:0 0 10px red, 0 0 20px red, 0 0 40px red, 0 0 80px red, 0 0 160px red;
+              
+            }
+          }
+          .herotitle:hover{
+            color: black;
+            -webkit-text-size-adjust: clamp(2.5rem, 10vw, 60rem);
+           transform: translateZ(100px);
+           transition: 2s;
+           animation: color1 5s linear  infinite forwards ;
+           -webkit-text-stroke: 5px white ;
+
+        }
+
+        .handle{
+            display: flex;
+            gap: 50px;
+            justify-content: space-around;
+            max-width: 44.75rem;
+            color: white;
+            
+        }
+        .radiotype{
+            display: block;
+            cursor: pointer;
+            font-weight: bolder;
+            font-size: 25px;
+            text-shadow: none;
+            padding: 20px;
+            backdrop-filter: blur(20px);
+           
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.023);
+        }
+        .radiotype input[type="radio"]{
+            display: none;
+        }
+        .radiotype input[type="radio"]:checked + span{
+            color: white;
+            text-shadow: 0 0 10px red, 0 0 20px red, 0 0 40px red, 0 0 80px red,0 0 160px red;
+        }
+        .radiotype span:hover{
+            color: red;
+            transition: color 2s;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            transform: translate(15%);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            color: #000;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .check {
+            color: green;
+        }
+        .cross {
+            color: red;
+        }
+        tr:hover{
+            background: #26252589;
+            color: #F3E600;
+        }
+        .navactive {
+          color: aqua !important;
+         
+          text-decoration: none;
+          font-size: clamp(1rem, 2vw, 1.25rem);
+      }
+      .login-form {
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+        margin: 2rem auto;
+        height: 110%;
+        border-radius: 14px;
+        backdrop-filter: blur(20px);
+        border-top: 1px solid  rgba(255, 255, 255, 0.586);
+        border-right: 1px solid  rgba(255, 255, 255, 0.623);
+        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.023);
+    }
+    .bookbtn {
+      background: linear-gradient(135deg, #2196F3, #1976D2); /* Blue gradient background */
+      border: none; /* Remove borders */
+      color: white; /* White text */
+      padding: 15px 32px; /* Some padding */
+      text-align: center; /* Center the text */
+      text-decoration: none; /* Remove underline */
+      display: inline-block; /* Make the button inline */
+      font-size: 18px; /* Increase font size */
+      margin: 10px 0; /* Add some margin */
+      cursor: pointer; /* Pointer cursor on hover */
+      border-radius: 25px; /* More rounded corners */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
+      transition: all 0.3s ease; /* Smooth transition for all properties */
+  }
+
+  .bookbtn:hover {
+      background: linear-gradient(135deg, #1E88E5, #1565C0); /* Darker blue gradient on hover */
+      transform: translateY(-2px); /* Slight lift effect */
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+  }
+
+  .bookbtn:active {
+      transform: translateY(0); /* Reset lift effect on click */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Reset shadow on click */
+  }
+  .bnavs{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .bnavs input[type="radio"]{
+    display: none;
+  }
+  .bnavs .sidebtn{
+    border-radius: 0px;
+    border: 2px solid white;
+    
+  }
+  .bnavs .sidebtn:hover{
+    opacity: 0.7;
+  }
+  .bnavs input[type="radio"]:checked+label{
+    border: 2px solid blue;
+    color: yellow;
+  }
+  .car-container{
+    background-color: #00000080;
+  padding: 20px;
+  height: 600px;
+  border-radius: 10px;
+  border: 1px solid aqua;
+  margin-bottom: 20px;
+  font-size: 20px;
+  width: 100%;
+     
+  }
+  #cars::-webkit-scrollbar,#taxies::-webkit-scrollbar,#carss::-webkit-scrollbar{
+    display: none;
+  }
+  #cars,#taxies,#carss{
+    display: flex; flex-wrap: wrap; justify-content: space-around;overflow:hidden; overflow-y: auto; height: 550px;
+  }
+  .button {
+    background-color: rgba(0, 150, 150, 0.7);
+  }
+  .button1 {
+    background-color: rgba(250, 0, 0, 0.7);
+  }
+  .button1:hover {
+    background-color: rgba(250, 0, 0, 1);
+  }
+  .button,.button1{
+  color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 10px;
+    }
+
+    .button:hover {
+    background-color: rgba(0, 150, 150, 1);
+    }
+   .tccontainer h1 {
+      text-align: center;
+      color: #333;
+  }
+  .tccontainer {
+      max-width: 900px;
+      background: black;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+     
+      border-radius: 5px;
+  }
+ .tccontainer h2 {
+      color: #00ffff;
+      border-bottom: 1px solid  white;
+      padding: 3px;
+      display: inline;
+  }
+ .tccontainer p {
+      line-height: 1.6;
+  }
+ .tccontainer ul {
+      padding-left: 20px;
+      transform: translateX(20px);
+  }
+    </style>
+</head>
+<body id="bgc">
+    
+    <header class="header" id="header" role="banner">
+        <div class="nav-content">
+            <a class="logo" aria-label="Arogya home">i cars</a>
+            <nav role="navigation" aria-label="Main navigation">
+                <ul class="nav-links">
+                    <li><a onclick="homefn()" id="home" class="nav-link">Home</a></li>
+                    <li><a onclick="aboutfn()" id="about" class="nav-link">About</a></li>
+                    <li><a onclick="contactfn()" id="contact" class="nav-link">Contact</a></li>
+                    <li><a onclick="subfn()" id="sub" class="nav-link">Subcription</a></li>
+                    <li>
+                      <span class="nav-link">Location:</span>
+                      <select class="nav-link" id="location" onchange="locationfn()" name="location" >
+                      
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala" selected>Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                      </select>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <label><input type="checkbox" id="procheck"  ><span class="nav-link" id="X" onclick="profilefn()">❌</span></label>
+        <!-- <div id="loading" >
+          <div class="a"><img width="60px" height="60px" src="{% static '/car img/car-steering-wheel-icon-vector-26135651-removebg-preview.png' %}" alt=""></div>
+      </div> -->
+    </header>
+    <div id="home1" class="hide">
+      <img class="background-image" id="homeimg" src="{% static '/car img/white car bg.jpg' %}" alt="Background decoration" loading="lazy" />
+              <div class="herosection show">
+                  <h1 class="herotitle ">i cars</h1>
+                  <h2 class="herosubtitle show1">CAR RENTAL</h2>
+                  {%if profile == "customer"%}
+                  <p class="herodescription show2">Get a car from <span class="lstate">Kerala</span></p>
+                  {%elif profile == "client" %}
+                  <p class="herodescription show2">Register a car in <span class="lstate">Kerala</span></p>
+                  {%else%}
+                  <p class="herodescription show2">Get details from <span class="lstate">Kerala</span></p>
+                  {%endif%}
+                  <form method="post" class="show1" style="display: flex; justify-content:center;align-items:baseline;gap:20px;">
+                    {% csrf_token %}
+                    <input type="hidden" name="role" value="BorR">
+                    <input type="hidden" id="BorR" name="BorR">
+                    <input type="hidden" id="state" name="state" value="Kerala"><br>
+                    {%if profile == "customer"%}
+                    <center><button class="bookbtn"  onclick="submitv(0)">Rent A Car</button></center>
+
+                    <center><button class="bookbtn"  onclick="submitv(1)">Book A Taxi</button></center>
+                    {%elif profile == "client" %}
+                    <center><button class="bookbtn"  onclick="submitv(2)">Register new Car</button></center>
+                    <center><button class="bookbtn"  onclick="submitv(5)">My cars</button></center>
+                    {%else%}
+                    <center><button class="bookbtn"  onclick="submitv(3)">Customer Details</button></center>
+                    <center><button class="bookbtn"  onclick="submitv(5)">My cars</button></center>
+                    <center><button class="bookbtn"  onclick="submitv(2)">Register i Cars</button></center>
+                    <center><button class="bookbtn"  onclick="submitv(4)">Client Details</button></center>
+                    {%endif%}
+                   
+                  </form>               
+              </div>
+  <br><br><br><br>
+              
+          </div>
+          <div id="about1" class="hide">
+              <section class="hero-section" aria-labelledby="mission-title">
+                  <img src="{% static '/car img/about1.webp'%}" alt="Healthy lifestyle background" class="hero-image" />
+                  <div class="hero-content show">
+                      <h1 id="mission-title" class="hero-title show">Our Mission</h1>
+                      <p class="hero-description show">At i Cars, we believe that renting a car should be simple and stress-free. Our mission is to empower you to make informed choices about your transportation needs, so you can enjoy your journey with confidence. We're committed to providing personalized rental options that cater to your unique travel requirements, preferences, and lifestyle.
+                      </p>
+                  </div>
+              </section>
+              <section class="content-section">
+              <header class="section-header">
+                  <h2 class="section-title vani">Our Story, Your Journey</h2>
+              </header>
+  
+              <div class="grid-section">
+                  <div class="text-content">
+                      <h3 class="section-subtitle vani">
+                          Our Team
+                          <span class="yellow-underline vani" aria-hidden="true"></span>
+                      </h3>
+                      <p class="description vani">We're proud to have a diverse team of professionals who are passionate about travel and mobility. Our experienced rental agents, automotive experts, and customer service specialists work tirelessly to bring you the best car rental experience. Each member of our team brings unique expertise and creativity to the table, ensuring that our services are both efficient and enjoyable.
+                      </p>
+                  </div>
+                  <div class="image-wrapper vani">
+                      <img src="{% static '/car img/team.jpg' %}" alt="Our team of nutrition experts" class="section-image" />
+                  </div>
+              </div>
+              <header class="section-header">
+                  <h2 class="section-title vani">Our team of automotive experts</h2>
+              </header>
+              <div class="grid-section technology-section">
+                  <div class="image-wrapper1 vani">
+                      <img src="{% static '/car img/engine.gif' %}" onmouseenter="sound('two')" alt="Our technology platform" class="section-image" />
+                  </div>
+                  <div class="text-content vani">
+                      <h3 class="section-subtitle vani">
+                          Our Technology
+                          <span class="yellow-underline vani" aria-hidden="true"></span>
+                      </h3>
+                      <p class="description vani">We harness the power of technology to make car rental seamless and personalized. Our advanced platform takes into account your travel preferences, budget, and itinerary to create a rental plan that fits you perfectly. With our user-friendly interface, you can easily browse available vehicles, manage your bookings, and discover new travel destinations—all at your fingertips.
+                      </p>
+                  </div>
+              </div>
+  
+              <div class="grid-section values-section">
+                  <div class="text-content vani">
+                      <h3 class="section-subtitle vani">
+                          Our Values
+                          <span class="yellow-underline vani" aria-hidden="true"></span>
+                      </h3>
+                      <p class="description vani">We believe that renting a car is a journey, not just a transaction. Our core values include sustainability, inclusivity, and education. We strive to promote eco-friendly transportation options that are good for you and the planet. We celebrate diversity and cater to a wide range of rental needs, from compact cars to luxury vehicles. We also aim to educate our community about the benefits of responsible travel, empowering you to make informed choices.
+                      </p>
+                  </div>
+                  <div class="image-wrapper vani">
+                      <img src="{% static '/car img/carvalues.jpg' %}" alt="Our values in action" class="section-image" />
+                  </div>
+              </div>
+          </section>
+      </div>
+          <div id="contact1" class="hide">
+              <div class="container" style="width: auto" role="main">
+                  <div class="main-content">
+                    <img loading="lazy" src="{% static '/car img/fire bg.gif' %}" style="transform: translate(0px)scale(1);" class="background-image" alt="Contact Us Background Image"/>
+                    <div class="content-wrapper" style="transform: translateY(-100px) scale(0.7);">
+                      <center><h1 class="contact-title show">Contact Us</h1></center>
+                      <div class="info-box show1">
+                        <div class="flex-container">
+                          <div class="left-column" style="perspective: 1000px;">
+                              <img src="{% static '/car img/fire car.gif' %}" style="height: 900px; width:auto" alt="Contact Us Background Image" class="show3">
+                          </div>
+                          <div class="right-column">
+                            <div class="team-info">
+                              <h2 class="team-title show1">OUR TEAM</h2><br><br>
+                              <div class="team-member-container show1">
+                                <h3 class="member-name ">ALDRIN JAISON</h3>
+                                <div class="contact-info">
+                                  <i class="fa-brands fa-instagram"></i>
+                                  <div class="contact-text">aldrin_jaison</div>
+                                </div>
+                                <button onclick="window.open('https://wa.me/+918943179187/?text=三 \ō͡≡o˞̶) Haii', '_blank');" class="whatsapp-button" aria-label="Contact Godson M.D. on WhatsApp">
+                                  <i class="fa-brands fa-whatsapp"></i>
+                                  <span class="phone-number">+91 8943179187</span>
+                                </button>
+                                
+                                <h3 class="member-name">ABDUL HALEEM M A</h3>
+                                <div class="social-container">
+                                  <i class="fa-brands fa-instagram"></i>
+                                  <div class="social-text">_.haleem___</div>
+                                </div>
+                                <button onclick="window.open('https://wa.me/+917025795082/?text=三 \ō͡≡o˞̶) Haii', '_blank');" class="whatsapp-button" aria-label="Contact M.S. Tharun on WhatsApp">
+                                  <i class="fa-brands fa-whatsapp"></i>
+                                  <span class="phone-number">+91 7025795082</span>
+                                </button>
+                
+                                <h3 class="member-name">ARJUN C</h3>
+                                <div class="social-container">
+                                  <i class="fa-brands fa-instagram"></i>
+                                  <div class="social-text">__arju_n___</div>
+                                </div>
+                                <button onclick="window.open('https://wa.me/+918136847095/?text=三 \ō͡≡o˞̶) Haii', '_blank');" class="whatsapp-button" aria-label="Contact M.S. Tharun on WhatsApp">
+                                  <i class="fa-brands fa-whatsapp"></i>
+                                  <span class="phone-number">+91 8136847095</span>
+                                </button>              
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+          </div>
+          <div class="hide" id="sub1">
+              <section class="hero-section" aria-labelledby="mission-title">
+                  <img src="{% static '/car img/curve road.webp'%}" alt="Healthy lifestyle background" class="hero-image" />
+                  <div class="hero-content show">
+                      <h1  class="hero-title show" style="color: #F3E600;">Subscribe a Car</h1>
+                      <p class="hero-description show">i Cars is one of the most trusted car rental services as it is promoted by Indus Motors, the top Maruti dealership in India. The rent-a-car service provider offers an outstanding model and a wide variety of vehicle options at the most competitive rates.</p>
+                  </div>
+              </section>
+              <section class="content-section">
+                  <header class="section-header">
+                      <h2 class="section-title vani">Comparison b/w Subscription & Buying</h2><br>
+                      <p class="hero-description vani" style="color: #000000;">
+                          A car subscription is a great option as it offers flexibility, convenience, and the ability to switch cars quickly with no long-term commitments and also doesn't require a large upfront payment such as insurance, road tax, and other payments which are required when buying a car.
+                      </p>
+                  </header>
+              </section>
+              <section class="content-section">
+              <h4 class="section-title vani">You Will Get :</h4><br>
+              <table class="vani">
+          <thead>
+              <tr>
+                  <th>Feature</th>
+                  <th>Subscription</th>
+                  <th>Buying</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>Zero Down Payment & Roadtax</td>
+                  <td class="check">✔️</td>
+                  <td class="check">✔️</td>
+              </tr>
+              <tr>
+                  <td>Annual Insurance Included</td>
+                  <td class="check">✔️</td>
+                  <td class="cross">❌</td>
+              </tr>
+              <tr>
+                  <td>Free Service & Maintenance</td>
+                  <td class="check">✔️</td>
+                  <td class="cross">❌</td>
+              </tr>
+              <tr>
+                  <td>Option to buy-out the car</td>
+                  <td class="check">✔️</td>
+                  <td class="cross">❌</td>
+              </tr>
+              <tr>
+                  <td>Return or Rent Anytime</td>
+                  <td class="check">✔️</td>
+                  <td class="cross">❌</td>
+              </tr>
+              <tr>
+                  <td>No Long Term Commitment</td>
+                  <td class="check">✔️</td>
+                  <td class="cross">❌</td>
+              </tr>
+              <tr>
+                  <td>Doorstep Pick/ Drop for Maintenance & Service</td>
+                  <td class="check">✔️</td>
+                  <td class="cross">❌</td>
+              </tr>
+              <tr>
+                  <td>Option to Switch Cars</td>
+                  <td class="check">✔️</td>
+                  <td class="cross">❌</td>
+              </tr>
+          </tbody>
+      </table>
+  <br><br><br>
+  {%if profile == "customer"%}                
+  {%if subss%}
+  <button class="submit-button" onclick="alert('Sorry, Currently Running a Subscription')">Take Subscription</button>
+  {%else%}
+  <button class="submit-button" onclick="window.location.href='/sub'">Take Subscription</button>
+  {%endif%}
+  {%endif%}
+
+  </section>
+          </div>
+
+    <div class="profile" id="profile" style="display:block">
+        <div class="pronav">
+            <div class="dpdiv1">
+                <img src="{% if user.dp %} {{user.dp.url}} {% else %} {% static '/dp/OIP (2).jpg' %} {% endif %}"  class="dpimg">
+                <span style="color: white; font-weight:700">{{user.name}}</span>
+            </div><hr>
+            <div class="sidenav">
+                <input type="radio" id="sb1" name="sidebtn" checked><label class="sidebtn" for="sb1" onclick="topro()">My Profile</label>                
+                <input type="radio" id="sb2" name="sidebtn" ><label class="sidebtn" for="sb2" onclick="tobook()">Bookings</label>
+                
+                {%if profile == "client"%}
+                {%else%}
+                <input type="radio" id="sb" name="sidebtn" ><label class="sidebtn" for="sb" onclick="tosub()">Subcriptions</label>
+                {%endif%}
+                {%if profile == "admin"%}
+                {%else%}
+                <input type="radio" id="sb3" name="sidebtn" ><label class="sidebtn" for="sb3" onclick="totc()">Terms & Conditions</label>
+                <input type="radio" id="sb4" name="sidebtn" ><label class="sidebtn" for="sb4" onclick="topp()">Privacy Policy</label>
+                <input type="radio" id="sb5" name="sidebtn" ><label class="sidebtn" for="sb5" onclick="tocp()">Change Password</label>
+                {%endif%}
+                <button class="sidebtn" onclick="window.location.href='/home'">Logout</button> 
+            </div> 
+        </div>
+        
+    <main id="main-content" class="main-container" style="display: block;" >
+      {%if profile == "admin"%}
+      <h1 class="section-title1">YOUR PROFILE</h1>
+      {%else%}
+        {% if user.phone %}
+        <h1 class="section-title1">YOUR PROFILE</h1>
+        {% else %}
+        <h1 class="section-title1">COMPLETE YOUR PROFILE</h1>
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="dpdiv">
+            <img src="{% if user.dp %} {{user.dp.url}} {% else %} {% static '/dp/OIP (2).jpg' %} {% endif %}"  class="dpimg">
+            <input type="hidden" name="role" value="profile">
+            {%if user.phone %}
+            {%if user.dob %}
+            <label for="dp" class="form-label">
+                <input type="file" id="dp" name="dp" onchange="submit();" class="form-input">
+                    <i class="fas fa-image"></i>
+            </label>
+            {%endif%}
+            {%endif%}
+        </div>
+        {%endif%}
+            <div class="form-group">
+                <label for="height" class="form-label">Name :</label>
+                <input type="text" id="name" name="name" class="form-input" 
+                       placeholder="Your name" value="{{user.name}}" required 
+                       aria-required="true">
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email :</label>
+                <input type="email" id="email" name="email" class="form-input"
+                       placeholder="Your email" value="{{user.email}}" readonly 
+                       aria-required="true">
+            </div>
+            {%if profile == "admin"%}
+            {%else%}
+            <div class="form-group">
+                <label for="phone" class="form-label">Phone :</label>
+                <input type="tel" id="phone" name="phone" class="form-input"
+                       placeholder="Your phone number" required
+                       aria-required="true" value="{%if user.phone %}{{user.phone}}{%endif%}">
+            </div>
+            <div class="form-group">
+                <label for="dob" class="form-label">DOB :</label>
+                <input type="text" id="dob" name="dob" class="form-input"
+                       placeholder="yyyy-mm-dd" required 
+                       title="required format: yyyy-mm-dd" value="{%if user.dob %}{{user.dob}}{%endif%}"
+                       aria-required="true"  pattern="^\d{4}-([1-9]|1[0-2])-\d{2}$" >
+            </div>
+            <center><h2>YOUR LICENCE</h2></center><br>
+            <div class="dldivs">
+                
+            <div class="dldiv">
+                
+                <label for="drive_l_f" class="form-label" title="Click to change image">
+                    <input type="file" id="drive_l_f" name="drive_l_f" onchange="submit();" class="form-input">
+                    <img src="{% if user.drive_l_f %} {{user.drive_l_f.url}} {% else %} {% static '/dp/drive_l_f.jpg' %} {% endif %}"  class="dlimg"><br>
+                        <center><span>FRONT SIDE</span></center>
+                </label>
+            </div>
+            <div class="dldiv">
+                
+                <label for="drive_l_b" class="form-label" title="Click to change image">
+                    <input type="file" id="drive_l_b" name="drive_l_b" onchange="submit();" class="form-input">
+                    <img src="{% if user.drive_l_b %} {{user.drive_l_b.url}} {% else %} {% static '/dp/drive_l_b.jpg' %} {% endif %}"  class="dlimg"><br>
+                    <center><span>BACK SIDE</span></center>
+                </label>
+            </div>
+        </div>
+            <button type="submit" class="continue-btn" id="continue-btn">SAVE</button>
+            <br><p></p>
+        {%endif%}
+
+        </form>
+    </main>
+    <main id="main-booking" class="main-container" style="display: none;" >
+      {%if profile == "client"%}
+      <h1 class="section-title1">AVAILABLE BOOKINGS</h1>
+      {%for booking in bookings%}
+        <div style="transform: translateY(10px);">
+          <div class="car-container show1" style="display: flex; gap:10px; height:300px">
+            <img src="{{booking.car.car_f_photo.url}}" alt="{{booking.car.carname}} of {{booking.car.owner}}" width="300px" height="auto">
+             <div  style="display: flex; gap: 200px;">
+              <div>
+               <h2>
+                 {{booking.car.campany}} 
+                 {{booking.car.carname}}
+               </h2>
+               {{booking.car.seater}} Seater, {{booking.car.gear}}, {{booking.car.fuel}}<br>
+               <p style="color: burlywood; font-size:15px;">
+
+                 Booked by {{booking.person.name}} <br>
+                 pick up <span style="color: #00ffff;" onclick="window.open('{{booking.pickupl}}','_blank')">location</span> <br>
+                 pick up time: <br>{{booking.pickup}} <br>
+                 drop off <span style="color: #00ffff;" onclick="window.open('{{booking.dropdownl}}','_blank')">location</span> <br>
+                 drop off time: <br>{{booking.dropdown}}
+               </p>
+              </div>
+               <div style="justify-content: center;color:#00ffff;text-align: center;">
+                <img src="{%if booking.person.dp %}{{booking.person.dp.url}}{% else %} {% static '/dp/OIP (2).jpg' %} {% endif %}" style="border-radius: 50%;" alt="DP of {{booking.person.name}}" width="200px" height="200px"><br>
+                <span onclick="window.open('https://wa.me/+91{{booking.person.phone}}/?text=*_Hello_* %0a> _I am from *i cars website*_ %0a', '_blank');">
+                  {{booking.person.phone}}
+                </span> <br>
+                <span onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to={{booking.person.email}}&su=Msg from i cars\'s  website&body=Hello, I am from i cars\'s website,%0a', '_blank');">
+                  {{booking.person.email}}
+                </span>
+                
+                
+               </div>
+             </div>
+          </div>
+        </div>
+        {%empty%}
+        <h1 class="section-title1">Car bookings not found</h1>
+        {%endfor%}
+      {%else%}
+      <h1 class="section-title1">YOUR BOOKINGS</h1>
+      <div class="bnavs">
+        <input type="radio" id="bcar" name="bbtn" checked ><label class="sidebtn" for="bcar" onclick="toCbook()">Cars</label>
+        <input type="radio" id="btaxi" name="bbtn" ><label class="sidebtn" for="btaxi" onclick="toTbook()">Taxies</label>
+      </div>
+      <div class="bcdis" id="cars">
+        {%if profile == "customer"%}
+        {%for booking in bookings%}
+        <div style="transform: translateY(10px);">
+          <div class="car-container show1" style="display: flex; gap:10px; height:300px">
+            <img src="{{booking.car.car_f_photo.url}}" alt="{{booking.car.carname}} of {{booking.car.owner}}" width="300px" height="auto">
+             <div  style="display: flex; gap: 200px;">
+              <div>
+               <h2>
+                 {{booking.car.campany}} 
+                 {{booking.car.carname}}
+               </h2>
+               {{booking.car.seater}} Seater, {{booking.car.gear}}, {{booking.car.fuel}}<br>
+               <p style="color: burlywood; font-size:15px;">
+
+                 Ownered by {{booking.car.owner}} <br>
+                 pick up <span style="color: #00ffff;" onclick="window.open('{{booking.pickupl}}','_blank')">location</span> <br>
+                 pick up time: <br>{{booking.pickup}} <br>
+                 drop off <span style="color: #00ffff;" onclick="window.open('{{booking.dropdownl}}','_blank')">location</span> <br>
+                 drop off time: <br>{{booking.dropdown}}
+               </p>
+              </div>
+               <div>
+                <h2>₹{{booking.car.rate}}</h2>
+                for {{booking.car.kms}} km without fuel <br>
+                Booked time: <br>{{booking.booked_time}} <br><br>
+                <form action="{% url 'cancelc' booking.id %}" method="post" onsubmit="return confirm('Are you sure to cancel?');">
+                  {% csrf_token %}
+                  <button type="submit" class="button1">Cancel</button>
+              </form>
+               </div>
+             </div>
+          </div>
+        </div>
+        {%empty%}
+        <h1 class="section-title1">Car bookings not found</h1>
+        {%endfor%}
+        {%else%}
+        {%for booking in bookings%}
+        <div style="transform: translateY(10px);">
+          <div class="car-container show1" style="display: flex; gap:10px; height:300px">
+            <img src="{{booking.car.car_f_photo.url}}" alt="{{booking.car.carname}} of {{booking.car.owner}}" width="300px" height="auto">
+             <div  style="display: flex; gap: 200px;">
+              <div>
+               <h2>
+                 {{booking.car.campany}} 
+                 {{booking.car.carname}}
+               </h2>
+               {{booking.car.seater}} Seater, {{booking.car.gear}}, {{booking.car.fuel}}<br>
+               <p style="color: burlywood; font-size:15px;">
+
+                 Booked by {{booking.person.name}} <br>
+                 pick up <span style="color: #00ffff;" onclick="window.open('{{booking.pickupl}}','_blank')">location</span> <br>
+                 pick up time: <br>{{booking.pickup}} <br>
+                 drop off <span style="color: #00ffff;" onclick="window.open('{{booking.dropdownl}}','_blank')">location</span> <br>
+                 drop off time: <br>{{booking.dropdown}}
+               </p>
+              </div>
+               <div style="justify-content: center;color:#00ffff;text-align: center;">
+                <img src="{%if booking.person.dp %}{{booking.person.dp.url}}{% else %} {% static '/dp/OIP (2).jpg' %} {% endif %}" style="border-radius: 50%;" alt="DP of {{booking.person.name}}" width="200px" height="200px"><br>
+                <span onclick="window.open('https://wa.me/+91{{booking.person.phone}}/?text=*_Hello_* %0a> _I am from *i cars website*_ %0a', '_blank');">
+                  {{booking.person.phone}}
+                </span> <br>
+                <span onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to={{booking.person.email}}&su=Msg from i cars\'s  website&body=Hello, I am from i car\'s website,%0a', '_blank');">
+                  {{booking.person.email}}
+                </span>
+                
+               </div>
+             </div>
+          </div>
+        </div>
+        {%empty%}
+        <h1 class="section-title1">Car bookings not found</h1>
+        {%endfor%}
+      {%endif%}
+      </div>
+      <div class="btdis" id="taxies" style="display: none;">
+        {%if profile == "customer"%}
+        {%for taxi in taxies%}
+        <div style="transform: translateY(10px);">
+          <div class="car-container show1" style="display: flex; gap:10px; height:300px">
+            <img src="{% static '/dp/taxi.jpeg' %}" alt="taxi img" width="300px" height="auto">
+             <div  style="display: flex; gap: 200px;">
+              <div>
+               <h2>
+                 TAXI
+               </h2>
+                Manual, Petrol, Dicki available<br>
+               <p style="color: burlywood; font-size:15px;">
+
+                 Ownered by i Cars <br>
+                 pick up <span style="color: #00ffff;" onclick="window.open('{{taxi.pickupl}}','_blank')">location</span> <br>
+                 pick up time: <br>{{taxi.pickup}} <br>
+                 number of members: {{taxi.noP}}
+               </p>
+              </div>
+               <div>
+                <h2>₹50</h2>
+                for minimum charge <br>
+                Your OTP: <span style="color: red;" title="You must be show this otp to your taxi driver">TAXI{{taxi.id}}</span><br>
+                Booked time: <br>{{taxi.booked_time}} <br><br>
+                <form action="{% url 'cancelt' taxi.id %}" method="post" onsubmit="return confirm('Are you sure to cancel?');">
+                  {% csrf_token %}
+                  <button type="submit" class="button1">Cancel</button>
+              </form>
+               </div>
+             </div>
+          </div>
+        </div>
+        {%empty%}
+        <h1 class="section-title1">Taxi bookings not found</h1>
+        {%endfor%}
+        {%else%}
+        {%for taxi in taxies%}
+        <div style="transform: translateY(10px);">
+          <div class="car-container show1" style="display: flex; gap:10px; height:300px">
+            <img src="{% static '/dp/taxi.jpeg' %}" alt="taxi img" width="300px" height="auto">
+             <div  style="display: flex; gap: 200px;">
+              <div>
+               <h2>
+                 TAXI
+               </h2>
+                Manual, Petrol, Dicki available<br>
+               <p style="color: burlywood; font-size:15px;">
+
+                 Booked by {{taxi.person.name}} <br>
+                 OTP: <span style="color: red;">TAXI{{taxi.id}}</span><br>
+                 pick up <span style="color: #00ffff;" onclick="window.open('{{taxi.pickupl}}','_blank')">location</span> <br>
+                 pick up time: <br>{{taxi.pickup}} <br>
+                 number of members: {{taxi.noP}}
+               </p>
+              </div>
+               <div style="justify-content: center;color:#00ffff;text-align: center;">
+                <img src="{%if taxi.person.dp %}{{taxi.person.dp.url}}{% else %} {% static '/dp/OIP (2).jpg' %} {% endif %}" style="border-radius: 50%;" alt="DP of {{taxi.person.name}}" width="200px" height="200px"><br>
+                <span onclick="window.open('https://wa.me/+91{{taxi.person.phone}}/?text=*_Hello_* %0a> _I am from *i cars website*_ %0a', '_blank');">
+                  {{taxi.person.phone}}
+                </span> <br>
+                <span onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to={{taxi.person.email}}&su=Msg from i cars\'s  website&body=Hello, I am from i car\'s website,%0a', '_blank');">
+                  {{taxi.person.email}}
+                </span>
+                
+               </div>
+             </div>
+          </div>
+        </div>
+        {%empty%}
+        <h1 class="section-title1">Taxi bookings not found</h1>
+        {%endfor%}
+      {%endif%}
+      </div>
+      {%endif%}
+      
+    </main>
+    <main id="main-sub" class="main-container" style="display: none;" >
+      <h1 class="section-title1">YOUR SUBCRIPTIONS</h1>
+      <div class="bcdis" id="carss">
+        {%if profile == "customer"%}
+        {%for booking in subss%}
+        <div style="transform: translateY(10px);">
+          <div class="car-container show1" style="display: flex; gap:10px; height:200px">
+            <img src="{% static '/dp/sub dp.jpg' %}" alt="dp of sub" width="200px" height="auto">
+             <div  style="display: flex; gap: 200px;">
+              <div>
+               <h2>
+                 Subcription <br> 
+                 For {{booking.month}} month{%if booking.month != 1 %}s {%endif%}
+               </h2>
+               Ending Date: {{booking.closedown}}<br>
+               <p style="color: burlywood; font-size:15px;">
+                transaction id: {{booking.transitionID}} <br>
+                {%if "Not" in booking.verified%}
+                <span style="color: red;">Transaction {{booking.verified}} ❌</span>
+                {%else%}
+                <span style="color: green;">Transaction {{booking.verified}} ✅</span>
+                {%endif%}
+               </p>
+              </div>
+               <div>
+                <h2>₹{{booking.prize}}</h2>
+                For {{booking.month}} month{%if booking.month != 1 %}s {%endif%}<br>
+                Started date: <br>{{booking.booked_time}} <br><br>
+               </div>
+             </div>
+          </div>
+        </div>
+        {%empty%}
+        <h1 class="section-title1">Take Any Subcriptions</h1>
+        {%endfor%}
+        {%else%}
+        {%for booking in subss%}
+        <div style="transform: translateY(10px);">
+          <div class="car-container show1" style="display: flex; gap:10px; height:300px">
+            <img src="{% static '/dp/sub dp.jpg' %}" alt="dp of sub" width="200px" height="auto">
+            <div  style="display: flex; gap: 200px;">
+              <div>
+               <h2>
+                Subcription <br> 
+                For {{booking.month}} month{%if booking.month != 1 %}s {%endif%}
+               </h2>
+               Ending Date: {{booking.closedown}}<br>
+               <p style="color: burlywood; font-size:15px;">
+                ₹{{booking.prize}} <br>
+                Started date: <br>{{booking.booked_time}} <br>
+                transaction id: {{booking.transitionID}} <br>
+                taken by {{booking.person.name}} <br>
+                {%if "Not" in booking.verified%}
+                <span style="color: red;">Transaction {{booking.verified}} ❌</span>
+                {%else%}
+                <span style="color: green;">Transaction {{booking.verified}} ✅</span>
+                {%endif%}
+
+               </p>
+              </div>
+               <div style="justify-content: center;color:#00ffff;text-align: center;">
+                <img src="{%if booking.person.dp %}{{booking.person.dp.url}}{% else %} {% static '/dp/OIP (2).jpg' %} {% endif %}" style="border-radius: 50%;" alt="DP of {{booking.person.name}}" width="200px" height="200px"><br>
+                <span onclick="window.open('https://wa.me/+91{{booking.person.phone}}/?text=*_Hello_* %0a> _I am from *i cars website*_ %0a', '_blank');">
+                  {{booking.person.phone}}
+                </span> <br>
+                <span onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to={{booking.person.email}}&su=Msg from i cars\'s  website&body=Hello, I am from i car\'s website,%0a', '_blank');">
+                  {{booking.person.email}}
+                </span>
+                
+               </div>
+             </div>
+          </div>
+        </div>
+        {%empty%}
+        <h1 class="section-title1">Subcriptions are not found</h1>
+        {%endfor%}
+      {%endif%}
+      </div>
+    </main>
+    <main id="main-tc" class="main-container" style="display: none;" >
+      <h1 class="section-title1">TERMS & CONDITIONS</h1>
+      <div class="tccontainer">
+        
+        <p> <strong>i Cars</strong>, hereinafter referred to as the "COMPANY" agrees to lease a vehicle to any individual ("RENTER") who complies with the following terms and conditions.</p>
+
+        <h2>1. INFORMATION AND INITIAL RECITALS</h2>
+        <ul>
+            <li>The RENTER shall provide accurate personal details, including name, age, birthday, address, and any other requested information.</li>
+            <li>The RENTER must present a government-issued proof of identification.</li>
+        </ul>
+
+        <h2>2. PAYMENT</h2>
+        <ul>
+            <li>Payments shall follow the agreed stipulations and computations.</li>
+            <li>A security deposit of <strong>P10,000.00</strong> shall be collected upon signing the rental agreement. This deposit may be forfeited in case of damages.</li>
+            <li>The rental fee is as specified in the agreement unless modified by mutual consent.</li>
+            <li>Payments must be made free of any deductions, taxes, or charges.</li>
+            <li>Late payments will incur a <strong>12% legal interest per annum</strong>.</li>
+            <li>The COMPANY reserves the right to reclaim the vehicle if the RENTER fails to pay on time.</li>
+            <li>The RENTER consents to credit card reservations for estimated charges.</li>
+            <li>All charges are subject to final audit and correction.</li>
+        </ul>
+
+        <h2>3. GENERAL PROVISIONS ON RENTED VEHICLE</h2>
+        <ul>
+            <li>The rented vehicle includes tires, tools, equipment, accessories, and documents belonging to the COMPANY.</li>
+            <li>The vehicle is rented solely for personal use.</li>
+            <li>The COMPANY is not responsible for manufacturer defects.</li>
+            <li>The RENTER assumes full responsibility for vehicle selection and compliance with laws.</li>
+            <li>Any manufacturer warranty claims must be handled directly by the RENTER.</li>
+        </ul>
+
+        <h2>4. TERM</h2>
+        <ul>
+            <li>The vehicle must be returned in good condition on the due date or upon demand.</li>
+            <li>Early return does not entitle the RENTER to a refund for unused rental time.</li>
+            <li>Cancellation by the RENTER may result in forfeiture of fees and deposits.</li>
+            <li>Reservation cancellations result in forfeiture of the reservation fee.</li>
+        </ul>
+
+        <h2>5. RELEASE AND RETURN OF THE RENTED VEHICLE</h2>
+        <ul>
+            <li>The vehicle shall be returned in the same condition, including a full fuel tank.</li>
+            <li>Prior to rental, the RENTER must inspect and approve the vehicle.</li>
+            <li>The RENTER must return all original accessories, tools, and equipment.</li>
+            <li>Failure to return the vehicle on time without approval may lead to legal action.</li>
+        </ul>
+
+        <h2>6. INSPECTION OF THE RENTED VEHICLE</h2>
+        <ul>
+            <li>The COMPANY may inspect the vehicle at any time during business hours.</li>
+            <li>Inspection includes both exterior and interior components.</li>
+        </ul>
+
+        <h2>7. PROHIBITED USES OF THE VEHICLE</h2>
+        <ul>
+            <li>Carrying passengers or property for commercial purposes.</li>
+            <li>Towing vehicles or trailers.</li>
+            <li>Participating in motorsports.</li>
+            <li>Transporting illegal goods.</li>
+            <li>Driving under the influence of alcohol or drugs.</li>
+            <li>Driving without a valid license.</li>
+            <li>Allowing unauthorized persons to drive.</li>
+            <li>Allowing new or inexperienced drivers (less than one year of driving experience).</li>
+        </ul>
+
+        <h2>8. LIABILITY FOR LOSS OR ACCIDENT</h2>
+        <ul>
+            <li>The RENTER covers the first <strong>P5,000.00</strong> in repair costs for any accident.</li>
+            <li>Damage due to abusive use is the RENTER's responsibility.</li>
+            <li>Lost accessories, tools, or equipment will be charged to the RENTER.</li>
+            <li>The COMPANY is not liable for claims beyond insurance coverage.</li>
+            <li>Accidents must be reported immediately.</li>
+            <li>Total vehicle loss incurs a charge of <strong>40% of the car's value</strong>.</li>
+        </ul>
+
+        <h2>9. OWNERSHIP OF THE RENTED VEHICLE</h2>
+        <ul>
+            <li>The vehicle remains the property of the COMPANY.</li>
+            <li>Failure to comply with terms may result in repossession at the RENTER's expense.</li>
+            <li>The COMPANY may retrieve the vehicle for non-payment or contract violations.</li>
+        </ul>
+
+        <p><strong>By proceeding with the rental, you confirm that you have read and agreed to these Terms and Conditions.</strong></p>
+    </div>
+    </main>
+    <main id="main-pp" class="main-container" style="display: none;" >
+      <h1 class="section-title1">PRIVACY POLICY</h1>
+      <div class="tccontainer">
+      <header>
+        <p>Last Updated: 20/3/25 </p>
+    </header>
+
+    <section class="content">
+        <h2>1. Introduction</h2>
+        <p>Welcome to <strong>iCars</strong>! Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your personal information when you use our car rental services.</p>
+
+        <h2>2. Information We Collect</h2>
+        <h3>2.1 Personal Information</h3>
+        <p>When you register, book a rental, or contact us, we may collect:</p>
+        <ul>
+            <li>Full Name</li>
+            <li>Email Address</li>
+            <li>Phone Number</li>
+            <li>Home Address</li>
+            <li>Driver's License Information</li>
+            <li>Payment Details (Credit/Debit Card, Billing Address)</li>
+            <li>Date of Birth</li>
+        </ul>
+
+        <h3>2.2 Non-Personal Information</h3>
+        <p>We may also collect non-personal data for analytics and security:</p>
+        <ul>
+            <li>IP Address</li>
+            <li>Browser Type and Version</li>
+            <li>Device Information</li>
+            <li>Website Usage Data (Cookies, Analytics)</li>
+        </ul>
+
+        <h2>3. How We Use Your Information</h2>
+        <p>Your information is used for:</p>
+        <ul>
+            <li>Processing bookings and verifying identity</li>
+            <li>Providing customer support</li>
+            <li>Sending booking confirmations and updates</li>
+            <li>Preventing fraud and ensuring security</li>
+            <li>Improving our website and services</li>
+            <li>Marketing and promotional offers (if opted-in)</li>
+            <li>Compliance with legal obligations</li>
+        </ul>
+
+        <h2>4. How We Share Your Information</h2>
+        <h3>4.1 With Third-Party Service Providers</h3>
+        <p>We share necessary data with trusted partners for:</p>
+        <ul>
+            <li>Payment processing (e.g., PayPal, Stripe)</li>
+            <li>Identity verification</li>
+            <li>Marketing services (if you opt-in)</li>
+            <li>Analytics (Google Analytics, Facebook Pixel)</li>
+        </ul>
+
+        <h3>4.2 Legal Compliance</h3>
+        <p>We may disclose your information if required by law or in response to legal requests.</p>
+
+        <h2>5. Data Security</h2>
+        <p>We implement industry-standard security measures, including:</p>
+        <ul>
+            <li>Secure servers</li>
+            <li>Data encryption</li>
+            <li>Access control mechanisms</li>
+            <li>Regular security audits</li>
+        </ul>
+        <p>However, no online system is 100% secure. We advise users to safeguard their personal information.</p>
+
+        <h2>6. Cookies and Tracking Technologies</h2>
+        <p>We use cookies to enhance user experience. You can manage cookies in your browser settings.</p>
+
+        <h2>7. Data Retention</h2>
+        <p>We retain personal data for as long as necessary to fulfill the purposes outlined in this policy, including legal and accounting obligations.</p>
+
+        <h2>8. Children's Privacy</h2>
+        <p>Our services are not intended for individuals under 18. We do not knowingly collect data from minors.</p>
+
+        <h2>9. Your Rights & Choices</h2>
+        <p>You have the right to:</p>
+        <ul>
+            <li>Access and update your personal data</li>
+            <li>Request data deletion (subject to legal obligations)</li>
+            <li>Opt out of marketing communications</li>
+        </ul>
+        <p>To exercise these rights, contact us at <a style="color: #1565C0;" onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=support@icars.com&su=Msg from i cars\'s  website&body=Hello, I am from i car\'s website,%0a', '_blank');">support@icars.com</a>.</p>
+
+        <h2>10. Dispute Resolution</h2>
+        <p>If you have concerns about our use of your data, contact our support team. If unresolved, you may file a complaint with your local data protection authority.</p>
+
+        <h2>11. Contact Us</h2>
+        <p>If you have any questions, reach us at:</p>
+        <ul>
+            <li>Email: <a style="color: #1565C0;" onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=support@icars.com&su=Msg from i cars\'s  website&body=Hello, I am from i car\'s website,%0a', '_blank');">support@icars.com</a></li>
+            <li>Phone: +91 8943179187</li>
+            <li>Pincode: 680613 </li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 iCars. All rights reserved.</p>
+    </footer></div>
+    </main>
+    <main id="main-pc" class="main-container" style="display: none;" >
+      <h1 class="section-title1">TO CHANGE YOUR PASSWORD</h1>
+      <center>{%if profile == "client"%}
+      <a href="{% url 'rchangep' user.id  %}" class="button1 otp" onclick="sendotp()">CHANGE MY PASSWORD</a>
+      {%else%}
+      <a href="{% url 'cchangep' user.id  %}" class="button1 otp" onclick="sendotp()">CHANGE MY PASSWORD</a>
+      {%endif%}</center>
+    </main>
+
+  </div>    
+  <audio id="suii" src="{% static '/mp3/suii.mp3' %}" preload="auto" muted></audio>
+  <audio id="fire" src="{% static '/mp3/fire.mp3' %}" preload="auto" muted></audio>
+  <audio id="two" src="{% static '/mp3/two stroke.mp3' %}" preload="auto" muted></audio>
+</body>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+  //document.getElementById("dob").value="{{ user.dob }}";
+  var audio = document.getElementById('suii');
+
+  // Play muted audio on button click
+ function sendotp(){
+  
+  var otpbtn=document.querySelector(".otp");
+  otpbtn.innerText="OTP SENDING...";
+ }
+   function submit()
+    {
+        document.getElementById("continue-btn").click()
+      }
+      let home=document.getElementById('home');
+      let about=document.getElementById('about');
+      let contact=document.getElementById('contact');
+      let sub=document.getElementById('sub');
+      let hdiv=document.getElementById('home1');
+      let adiv=document.getElementById('about1');
+      let cdiv=document.getElementById('contact1');
+      let sdiv=document.getElementById('sub1');
+      let bgc=document.getElementById('bgc');
+      //let load=document.getElementById('loading');
+      let profile = document.getElementById("profile");
+      let mainContainer = document.getElementById("main-content");
+      let x=document.getElementById("X");
+      let state= document.getElementById("location");
+      let lc= document.getElementById("lc");
+      let lstate=document.querySelectorAll(".lstate");
+      let lat=document.getElementById("lat");
+      let long=document.getElementById("long");
+      //let submitv=document.getElementById("submit1");
+      let BorR=document.getElementById("BorR");
+      
+      function toCbook()
+      {
+        document.getElementById("cars").style.display="block";
+        document.getElementById("taxies").style.display="none";
+      }
+      function toTbook()
+      {
+        document.getElementById("cars").style.display="none";
+        document.getElementById("taxies").style.display="block";
+      }
+    function submitv(n)
+    {
+      switch(n){
+        case 0:
+        BorR.value="car";
+        break;
+        case 1:
+        BorR.value="taxi";
+        break;
+        case 2:
+        BorR.value="Rcar";
+        break;
+        case 3:
+        BorR.value="CD";
+        break;
+        case 4:
+        BorR.value="ClD";
+        break;
+        case 5:
+        BorR.value="Mycars";
+        break;
+        default:
+        BorR.value="3G";
+      }
+
+    }
+    function sound(id)
+    {
+      var audio = document.getElementById(id);
+      audio.muted = false; // Unmute the audio
+      audio.play().catch(function(error) {
+          alert('Error playing audio:'+ error);
+      });
+    }
+    function homefn()
+    {
+        home.classList.add("navactive");
+        about.classList.remove("navactive");
+        contact.classList.remove("navactive");
+        sub.classList.remove("navactive");
+        sdiv.classList.add("hide");
+        hdiv.classList.remove("hide");
+        profile.style.display = "none";
+        adiv.classList.add("hide");
+        cdiv.classList.add("hide");
+        x.innerText="Your Profile";
+        //load.style.display="none";
+        bgc.classList.add("black");
+        bgc.classList.remove("white");
+        audio.muted = false; // Unmute the audio
+      audio.play().catch(function(error) {
+          alert('Error playing audio:'+ error);
+      });
+    }
+    function aboutfn()
+    {
+        home.classList.remove("navactive");
+        about.classList.add("navactive");
+        contact.classList.remove("navactive");
+        hdiv.classList.add("hide");
+        //load.style.display="none";
+        adiv.classList.remove("hide");
+        cdiv.classList.add("hide");sub.classList.remove("navactive");
+        profile.style.display = "none";
+        sdiv.classList.add("hide");
+        bgc.classList.add("white");
+        x.innerText="Your Profile";
+        bgc.classList.remove("black");
+    
+    }
+    function contactfn()
+    {
+      sound('fire');
+        home.classList.remove("navactive");
+        about.classList.remove("navactive");
+        contact.classList.add("navactive");
+        hdiv.classList.add("hide");
+        //load.style.display="none";
+        adiv.classList.add("hide");
+        cdiv.classList.remove("hide");
+        sub.classList.remove("navactive");
+        sdiv.classList.add("hide");
+        x.innerText="Your Profile";
+        profile.style.display = "none";
+        bgc.classList.remove("white");
+        bgc.classList.add("black");
+    }
+    function subfn()
+    {
+        home.classList.remove("navactive");
+        about.classList.remove("navactive");
+        contact.classList.remove("navactive");
+        hdiv.classList.add("hide");
+        //load.style.display="none";
+        adiv.classList.add("hide");
+        cdiv.classList.add("hide");
+        sub.classList.add("navactive");
+        profile.style.display = "none";
+        x.innerText="Your Profile";
+        sdiv.classList.remove("hide");
+        bgc.classList.add("white");
+        bgc.classList.remove("black");
+    }
+    function closeall()
+    {
+      home.classList.remove("navactive");
+      about.classList.remove("navactive");
+      contact.classList.remove("navactive");
+      sub.classList.remove("navactive");
+        profile.style.display = "none";
+      hdiv.classList.add("hide");
+      cdiv.classList.add("hide");
+      adiv.classList.add("hide");
+      sdiv.classList.add("hide");
+    }
+    bgc.classList.add("black");
+    bgc.classList.remove("white");
+   function profilefn() {
+   
+     //document.getElementById("loading").style.display="none";
+    if (profile.style.display == "none")
+    {
+      closeall();
+        x.innerHTML='❌';
+        bgc.classList.add("black");
+        bgc.classList.remove("white");
+        profile.style.display = "block";
+        mainContainer.classList.remove("centered"); // Remove centered class
+    } else {
+        x.innerText="Your Profile";
+        profile.style.display = "none";
+        mainContainer.classList.add("centered");
+        homefn(); // Add centered class
+    }
+}
+function locationfn()
+{
+ //document.getElementById("loading").style.display="none";
+ lstate[0].innerText=state.value;
+ document.getElementById("state").value=state.value;
+ //lstate[1].innerText=state.value;
+ homefn();
+}
+function topro()
+{
+ //document.getElementById("loading").style.display="none";
+
+  document.getElementById("main-content").style.display="block";
+  document.getElementById("main-booking").style.display="none";
+  document.getElementById("main-tc").style.display="none";
+  document.getElementById("main-pp").style.display="none";
+  document.getElementById("main-sub").style.display="none";
+  document.getElementById("main-pc").style.display="none";
+
+}
+function tobook()
+{
+  document.getElementById("main-content").style.display="none";
+  document.getElementById("main-booking").style.display="block";
+  document.getElementById("main-sub").style.display="none";
+  document.getElementById("main-tc").style.display="none";
+  document.getElementById("main-pp").style.display="none";
+  document.getElementById("main-pc").style.display="none";
+
+}
+function tosub()
+{
+  document.getElementById("main-content").style.display="none";
+  document.getElementById("main-booking").style.display="none";
+  document.getElementById("main-sub").style.display="block";
+  document.getElementById("main-tc").style.display="none";
+  document.getElementById("main-pp").style.display="none";
+  document.getElementById("main-pc").style.display="none";
+
+}
+function totc()
+{
+  document.getElementById("main-content").style.display="none";
+  document.getElementById("main-booking").style.display="none";
+  document.getElementById("main-sub").style.display="none";
+  document.getElementById("main-tc").style.display="block";
+  document.getElementById("main-pp").style.display="none";
+  document.getElementById("main-pc").style.display="none";
+
+}
+function topp()
+{
+  document.getElementById("main-content").style.display="none";
+  document.getElementById("main-booking").style.display="none";
+  document.getElementById("main-sub").style.display="none";
+  document.getElementById("main-tc").style.display="none";
+  document.getElementById("main-pp").style.display="block";
+  document.getElementById("main-pc").style.display="none";
+
+}
+function tocp()
+{
+  document.getElementById("main-content").style.display="none";
+  document.getElementById("main-booking").style.display="none";
+  document.getElementById("main-sub").style.display="none";
+  document.getElementById("main-tc").style.display="none";
+  document.getElementById("main-pp").style.display="none";
+  document.getElementById("main-pc").style.display="block";
+
+}
+//setTimeout(profilefn,10);
+
+
+
+  </script>
+</html>

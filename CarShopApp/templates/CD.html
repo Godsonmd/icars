@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i cars | Car Choosing</title>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="main-wrapper">
+          <img src="{% static '/car img/fbg.png' %}" alt="Background car image" class="background-image" />
+          <nav class="nav-container" role="navigation" aria-label="Main navigation">
+            <div class="nav-links show1">
+              <div class="brand-logo" style="color: #fff;">i CARS</div>
+            </div>
+            <button class="cta-button show2" onclick="window.location.href='/profile'" aria-label="Buy Now">Back</button>
+          </nav>
+         
+          <main class="content-wrapper">
+                
+            <div class="car-container show1">
+                {%if customers%}
+                <div style="display: flex; align-items:center;justify-content:space-between;"><h1>Your Customers</h1></div>
+                <div id="cars">
+                {%for c in customers%}
+                <div class="car-container show1" style="display: flex; gap:10px; height:350px">
+                  <img src="{% if c.dp %} {{c.dp.url}} {% else %} {% static '/dp/OIP (2).jpg' %} {% endif %}" alt="{{c.name}}'s dp" width="400px" height="auto">
+                   <div  style="display: flex; gap: 200px;">
+                    <div>
+                     <h2>
+                       Name: {{c.name}} <br>
+                       {{c.email}} <br> Pass: {{c.password}}
+                     </h2>
+                     DOB: {{c.dob}} <br>Phone: {{c.phone}} <br> <br>
+                     <p style="color: burlywood; font-size:15px;">
+                      <form action="{%url 'cban' c.id %}" method="post" onsubmit="return confirm('Are you sure to ban?');">
+                        {% csrf_token %}
+                        <button type="submit" class="button1">BAN</button>
+                      </form>
+                     </p>
+                    </div>
+                     <div>
+                        <div style="display: flex;gap: 50px;">
+                            {% if c.drive_l_f %}
+                            <img src=" {{c.drive_l_f.url}}  " alt="drive_l_f" height="100px" width="200px" >
+                            {% endif %}
+                            {% if c.drive_l_b %}
+                            <img src=" {{c.drive_l_b.url}}" alt="drive_l_b" height="100px" width="200px" >
+                            {%else%}
+                            <h1>No Driving Licence</h1>
+                            {% endif %}
+                        </div><br>
+                        <div style="display: flex; flex-direction:column; gap: 5px;">
+                          {% if c.phone %}
+                          <a class="button" style="display: inline-block;" onclick="window.open('https://wa.me/+91{{c.phone}}/?text=*_Hello_* %0a> _I am from *i cars website*_ %0a', '_blank');">Chat in Whatsapp</a>
+                          {% endif %}
+                          <a class="button" style="display: inline-block;" href="{% url 'Bcars' c.id %}">Car Bookings</a>
+                          <a class="button" style="display: inline-block;" href="{% url 'BT' c.id %}">Taxi Bookings</a>
+                          <a class="button" style="display: inline-block;" href="{% url 'SB' c.id %}">Subcriptions</a>
+                        </div>
+                     </div>
+                   </div>
+                </div>
+                
+                {%endfor%}
+              </div>
+                {%else%}
+                <div style="display: flex; align-items:center;justify-content:space-between;"><h1>No Customers</h1></div>
+                {%endif%}
+              </div>                          
+              </main>        
+        </div>
+    </div>
+</body>
+      <style>
+      :root {
+        --primary-color:#ea454c;
+        --secondary-color: rgb(135, 68, 68);
+        --text-color: #000;
+        --white: #fff;
+        --border-color: rgb(216, 218, 220);
+        --focus-outline: 3px solid #4D90FE;
+      }
+      .licon{
+        transform: translateY(3px);
+        transition: all 1s;
+      }
+      #licon1:hover,#licon2:hover{
+        transform: translateY(0px) scale(1.5);        
+        color:red;
+      }
+      .handle{
+        display: flex;
+        gap: 50px;
+        justify-content: space-around;
+        max-width: 44.75rem;
+        color: white;
+        
+    }
+    .radiotype{
+        display: block;
+        cursor: pointer;
+        font-weight: bolder;
+        font-size: 25px;
+        text-shadow: none;
+        
+    }
+    .radiotype input[type="radio"]{
+        display: none;
+    }
+    .radiotype input[type="radio"]:checked + span{
+        color: white;
+        text-shadow: 0 0 10px red, 0 0 20px red, 0 0 40px red, 0 0 80px red,0 0 160px red;
+    }
+    .radiotype span:hover{
+        color: red;
+        transition: color 2s;
+    }
+      .vani{
+        animation: vv both;
+        animation-timeline: view(75% 25%);
+       }
+       @keyframes vv{
+        from{
+            opacity: 0;
+            transform: translateY(200px) scale(0.3);
+        } 
+        to{
+            opacity: 1;
+            transform: translateY(0px) scale(1);
+        }            
+       }
+       
+       .show{
+        animation: ss 2s   1 ease ;
+       }
+       @keyframes ss{
+        from{
+            opacity: 0;
+            transform: translateY(50px) scale(0.3);
+        } 
+        to{
+            opacity: 1;
+            transform: translateY(0px);
+        }            
+       }
+       .show1{
+        animation: sss 2s   1 ease ;
+       }
+       @keyframes sss{
+        from{
+            opacity: 0;
+            transform: translateX(-50px);
+            
+        } 
+        to{
+            opacity: 1;
+            transform: translateX(0px);
+        }            
+       }
+       .show2{
+        animation: ssss 2s   1 ease ;
+       }
+       @keyframes ssss{
+        from{
+            opacity: 0;
+            transform: translateX(50px);
+            
+        } 
+        to{
+            opacity: 1;
+            transform: translateX(0px);
+        }            
+       }
+      .tc-link{
+        text-decoration: none;
+        color: white;
+        transition: all 1s;
+      }
+      .tc-link:hover{
+        text-decoration: underline;
+        color: red;
+    }
+      .signup-container {
+        background-color: var(--text-color);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        min-height: 60vh;
+      }
+      body{
+        background-color: #000;
+      }
+      body::-webkit-scrollbar{
+        display: none;
+      }
+      .form-container::-webkit-scrollbar{
+        display: none;
+      }
+      #cars::-webkit-scrollbar{
+        display: none;
+      }
+      #cars{
+        display: flex; flex-wrap: wrap; justify-content: space-around;overflow:hidden; overflow-y: auto; height: 500px;
+      }
+      .main-wrapper {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        min-height: 99vh;
+        width: 100%;
+      }
+      
+      .background-image {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        width: 100%;
+        object-fit:cover;
+        object-position: center;
+      }
+      
+      .nav-container {
+        position: relative;
+        background-color: transparent;
+        border-bottom: 2px solid white;
+        display: flex;
+        width: 100%;
+        gap: 20px;
+        font-family: Roboto, system-ui, sans-serif;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 1rem 5rem 1rem 1.125rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      
+      .nav-links {
+        display: flex;
+        gap: 2.5rem 3.625rem;
+        font-size: 1.25rem;
+        color: white;
+        font-weight: 400;
+        line-height: 1.2;
+        flex-wrap: wrap;
+        margin: auto 0;
+        align-items: center;
+      }
+      
+      .nav-link {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+      
+      .nav-link:hover,
+      .nav-link:focus {
+        color: var(--primary-color);
+        outline: none;
+        text-decoration: none;
+      }
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: #ea454c;
+        transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link:focus::after {
+        width: 100%;
+    }
+      .nav-link:focus-visible {
+        outline: var(--focus-outline);
+        outline-offset: 2px;
+      }
+      
+      .brand-logo {
+        text-transform: lowercase;
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: 5.4px;
+        text-align: center;
+        border: white;
+        padding: 0.5rem 1rem;
+        color: #000;
+        
+      }
+      
+      .cta-button {
+        background-color: black;
+        color: var(--white);
+        padding: 0.75rem 2rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.5s; /* Adjusted duration */
+        /*border-top-left-radius: 40px;
+        border-bottom-left-radius: 40px;*/
+        clip-path: polygon(0 50%, 20% 0,100% 0, 100% 100%, 20% 100%,0 50%);
+        border: 2px solid white;
+        transform: translateX(20px);
+        width: 180px; /* Set an initial width */
+    }
+    
+    .cta-button:hover,
+    .cta-button:focus {
+        background-color: red;
+        width: 200px; /* Target width on hover */
+    }
+      
+      .content-wrapper {
+        position: relative;
+        align-self: center;
+        width: 100%;
+        max-width: 1440px;
+        margin: auto;
+        padding: 2rem;
+        display: flex;
+        flex: 1;
+        color: #fff;
+        justify-content:center;
+        align-items: start;
+      }
+      .container {
+        width: 50%;
+        max-width: 600px;
+        margin-top: 20px;
+        }
+       
+      .form-container {
+        background-color: #00000080;
+        padding: 20px;
+        height: 200px;
+        border-radius: 10px;
+        border: 1px solid aqua;
+        margin-bottom: 20px;
+        font-size: 20px;
+        overflow-y: auto; 
+        width: 50%;       
+        }
+        .car-container{
+          background-color: #00000080;
+        padding: 20px;
+        height: 600px;
+        border-radius: 10px;
+        border: 1px solid aqua;
+        margin-bottom: 20px;
+        font-size: 20px;
+        width: 100%;
+           
+        }
+      input,select{
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid aqua;
+        background-color: white;
+        color: black;
+        border-radius: 5px;
+        appearance:none;
+        }
+       
+        select {
+            width: 525px;
+            color: black;            
+        }
+        .button {
+          background-color: rgba(0, 150, 150, 0.7);
+        }
+        .button1 {
+          background-color: rgba(250, 0, 0, 0.7);
+        }
+        .button1:hover {
+          background-color: rgba(250, 0, 0, 1);
+        }
+        .button,.button1{
+        color: white;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 16px;
+          display: inline-block;
+          text-decoration: none;
+          text-align: center;
+          margin-bottom: 10px;
+          }
+
+          .button:hover {
+          background-color: rgba(0, 150, 150, 1);
+          }
+        
+      </style>
+</html>

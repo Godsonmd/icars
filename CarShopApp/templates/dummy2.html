@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="scrollableDiv" style="height: 200px; overflow-y: scroll; border: 1px solid #ccc;">
+        <p>Content line 1</p>
+        <p>Content line 2</p>
+        <p>Content line 3</p>
+        <p>Content line 4</p>
+        <p>Content line 5</p>
+        <p>Content line 6</p>
+        <p>Content line 7</p>
+        <p>Content line 8</p>
+        <p>Content line 9</p>
+        <p>Content line 10</p>
+        <p>Content line 11</p>
+        <p>Content line 12</p>
+    </div>
+    <button id="smoothScrollButton">Scroll Down Smoothly</button>
+</body>
+</html>
+<script>
+    document.getElementById('smoothScrollButton').addEventListener('click', function() {
+        var div = document.getElementById('scrollableDiv');
+        var targetScroll = div.scrollHeight; // Target scroll position
+        var currentScroll = div.scrollTop; // Current scroll position
+        var scrollStep = 1; // Amount to scroll each frame
+        var duration = 2000; // Duration of the scroll in milliseconds
+        var startTime = null;
+    
+        function scrollDown(timestamp) {
+            if (!startTime) startTime = timestamp; // Initialize start time
+            var elapsed = timestamp - startTime; // Calculate elapsed time
+            var progress = Math.min(elapsed / duration, 1); // Calculate progress (0 to 1)
+    
+            // Calculate the current scroll position
+            currentScroll = currentScroll + (targetScroll - currentScroll) * progress;
+            div.scrollTop = currentScroll; // Set the new scroll position
+    
+            if (progress < 1) {
+                requestAnimationFrame(scrollDown); // Continue scrolling
+            }
+        }
+    
+        requestAnimationFrame(scrollDown); // Start the animation
+    });
+</script>
